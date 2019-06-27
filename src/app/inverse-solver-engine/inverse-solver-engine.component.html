@@ -1,0 +1,10 @@
+<div class="reset">
+  <div class="heading">Fwd Solver:</div>
+  <select id="forwardSolverEngine" class="form-control form-control-sm" [ngModel]="forwardSolverEngine.value" (ngModelChange)="onChange($event)">
+    <option *ngFor="let fs of forwardSolverEngineList" [value]="fs.value">{{fs.display}}</option>
+  </select>
+  <div class="heading">Inv Solver:</div>
+  <select id="inverseSolverEngine" class="form-control form-control-sm" [ngModel]="inverseSolverEngine.value" (ngModelChange)="onChange($event)">
+    <option *ngFor="let is of inverseSolverEngineList" [value]="is.value">{{fs.display}}</option>
+  </select>
+</div>
