@@ -20,38 +20,7 @@ describe('plot service', () => {
         inject([HttpTestingController, PlotService],
         (httpMock: HttpTestingController, service: PlotService) => {
             // set the test parameters
-            let paramData = {
-                "forwardSolverEngine": "DistributedPointSourceSDA",
-                "solutionDomain": "rofrho",
-                "independentAxes": {
-                    "show": false,
-                    "first": "ρ",
-                    "second": "t",
-                    "label": "t",
-                    "value": 0.05,
-                    "units": "ns",
-                    "firstUnits": "mm",
-                    "secondUnits": "ns"
-                },
-                "range": {
-                    "title": "Detector Positions",
-                    "startLabel": "Begin",
-                    "startLabelUnits": "mm",
-                    "startValue": 0.5,
-                    "endLabel": "End",
-                    "endLabelUnits": "mm",
-                    "endValue": 9.5,
-                    "numberLabel": "Number",
-                    "numberValue": 19
-                },
-                "opticalProperties": {
-                    "mua": 0.01,
-                    "mus": 1,
-                    "g": 0.8,
-                    "n": 1.4
-                },
-                "modelAnalysis": "R"
-            };
+            let paramData = { }; // don't need to pass actual data because the return data is fake
             // call the service
             service.getPlotData(paramData).subscribe((data: any) => {
                 expect(data.Detector).toBe("R(ρ)");
