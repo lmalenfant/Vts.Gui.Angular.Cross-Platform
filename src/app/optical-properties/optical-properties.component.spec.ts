@@ -14,23 +14,43 @@ describe('optical-properties component', () => {
         imports: [FormsModule]
       })
       .compileComponents();
-    }));
-
-    beforeEach(async(() => {
-        testHostFixture = TestBed.createComponent(TestHostComponent);
-        testHostComponent = testHostFixture.componentInstance;
-    }));
-
-    it('should have a title of Optical Properties', async(() => {
+      testHostFixture = TestBed.createComponent(TestHostComponent);
+      testHostComponent = testHostFixture.componentInstance;
       testHostComponent.opticalPropertiesComponent.opticalProperties = {
         mua: 0.01,
-        mus: 1,
+        musp: 1,
         g: 0.8,
         n: 1.4
       };
       testHostFixture.detectChanges();
-      const heading = testHostFixture.debugElement.query(By.css('.heading'));
-      expect(heading.nativeElement.innerText).toEqual('Optical Properties');
+  }));
+
+    it('should have a μa value of 0.01', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#mua'));
+        expect(testElement.nativeElement.value).toBe('0.01');
+      });
+    }));
+
+    it('should have a μs` value of 1', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#musp'));
+        expect(testElement.nativeElement.value).toBe('1');
+      });
+    }));
+
+    it('should have a g value of 0.8', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#g'));
+        expect(testElement.nativeElement.value).toBe('0.8');
+      });
+    }));
+
+    it('should have an n value of 1.4', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#n'));
+        expect(testElement.nativeElement.value).toBe('1.4');
+      });
     }));
 
     @Component({

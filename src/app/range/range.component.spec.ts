@@ -19,23 +19,69 @@ describe('range component', () => {
     beforeEach(async(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
-    }));
+        testHostComponent.rangeComponent.range = {
+          title: 'Detector Positions',
+          startLabel: 'Begin',
+          startLabelUnits: 'mm',
+          startValue: 0.5,
+          endLabel: 'End',
+          endLabelUnits: 'mm',
+          endValue: 9.5,
+          numberLabel: 'Number',
+          numberValue: 19
+        };
+        testHostFixture.detectChanges();
+      }));
 
     it('should have a title of Detector Positions', async(() => {
-      testHostComponent.rangeComponent.range = {
-        title: 'Detector Positions',
-        startLabel: 'Begin',
-        startLabelUnits: 'mm',
-        startValue: 0.5,
-        endLabel: 'End',
-        endLabelUnits: 'mm',
-        endValue: 9.5,
-        numberLabel: 'Number',
-        numberValue: 19
-      };
-      testHostFixture.detectChanges();
-      const heading = testHostFixture.debugElement.query(By.css('.heading'));
-      expect(heading.nativeElement.innerText).toEqual('Detector Positions');
+      const testElement = testHostFixture.debugElement.query(By.css('.heading'));
+      expect(testElement.nativeElement.innerText).toEqual('Detector Positions');
+    }));
+
+    it('should have a start label of Begin', async(() => {
+      const testElement = testHostFixture.debugElement.query(By.css('#startLabel'));
+      expect(testElement.nativeElement.innerText).toEqual('Begin');
+    }));
+
+    it('should have a begin value of 0.5', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#startValue'));
+        expect(testElement.nativeElement.value).toBe('0.5');
+      });
+    }));
+
+    it('should have mm as the start units', async(() => {
+      const testElement = testHostFixture.debugElement.query(By.css('#startUnits'));
+      expect(testElement.nativeElement.innerText).toEqual('mm');
+    }));
+
+    it('should have an end label of End', async(() => {
+      const testElement = testHostFixture.debugElement.query(By.css('#endLabel'));
+      expect(testElement.nativeElement.innerText).toEqual('End');
+    }));
+
+    it('should have an end value of 9.5', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#endValue'));
+        expect(testElement.nativeElement.value).toBe('9.5');
+      });
+    }));
+
+    it('should have mm as the end units', async(() => {
+      const testElement = testHostFixture.debugElement.query(By.css('#endUnits'));
+      expect(testElement.nativeElement.innerText).toEqual('mm');
+    }));
+
+    it('should have a number label of Number', async(() => {
+      const testElement = testHostFixture.debugElement.query(By.css('#numberLabel'));
+      expect(testElement.nativeElement.innerText).toEqual('Number');
+    }));
+
+    it('should have a number value of 19', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#numberValue'));
+        expect(testElement.nativeElement.value).toBe('19');
+      });
     }));
 
     @Component({
