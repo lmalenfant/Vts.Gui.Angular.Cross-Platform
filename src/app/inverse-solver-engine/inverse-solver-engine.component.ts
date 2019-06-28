@@ -20,11 +20,5 @@ export class InverseSolverEngineComponent {
     console.log(this.inverseSolverEngine.value);
     console.log(value);
     this.inverseSolverEngine.value = value;
-    switch (this.inverseSolverEngine.value) {
-      case 'PointSourceSDA':
-      case 'DistributedPointSourceSDA':
-      case 'MonteCarlo':
-      default:
-    }
   } 
 }

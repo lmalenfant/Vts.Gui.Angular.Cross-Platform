@@ -1,10 +1,12 @@
 <form name="form2" (submit)="onSubmit()">
    <!-- <div class="pull-right"><button id="File" type="submit" class="btn btn-primary" (click)="onClick()">Get File</button></div>
  -->
-
+  <!-- Forward Solver Engine -->
+  <app-forward-solver-engine [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
+  <br /><br /> 
   <!-- Inverse Solver Engine -->
   <app-inverse-solver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
-  <br /><br />
+  <br /><br /> 
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain>
   <br /><br /> 

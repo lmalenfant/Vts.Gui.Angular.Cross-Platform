@@ -16,8 +16,12 @@ import { PlotObject } from '../plot/plot-object.model';
 
 /** inverse-solver-analysis component*/
 export class InverseSolverAnalysisComponent implements OnInit {
-  forwardSolverEngine: ForwardSolverEngine = { value: 'DistributedPointSourceSDA', display: 'Standard Diffusion (Analytic: Distributed Point Source)' };
-  inverseSolverEngine: InverseSolverEngine = { value: 'DistributedPointSourceSDA', display: 'Standard Diffusion (Analytic: Distributed Point Source)' };  
+  forwardSolverEngine: ForwardSolverEngine = { 
+    value: 'DistributedPointSourceSDA', 
+    display: 'Standard Diffusion (Analytic: Isotropic Point Source)'};
+  inverseSolverEngine: InverseSolverEngine = { 
+    value: 'DistributedPointSourceSDA', 
+    display: 'Standard Diffusion (Analytic: Isotropic Point Source)' }; 
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
     show: false,
@@ -42,7 +46,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
   };
   opticalProperties: OpticalProperties = {
     mua: 0.01,
-    mus: 1,
+    musp: 1,
     g: 0.8,
     n: 1.4
   };
@@ -60,7 +64,8 @@ export class InverseSolverAnalysisComponent implements OnInit {
 
   onSubmit() {
     var isSettings = {
-      forwardSolverEngine: this.inverseSolverEngine.value,
+      //forwardSolverEngine: this.forwardSolverEngine.value,
+      inverseSolverEngine: this.inverseSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
