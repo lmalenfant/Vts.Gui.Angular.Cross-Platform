@@ -15,25 +15,53 @@ describe('forward-solver-engine component', () => {
         schemas: [NO_ERRORS_SCHEMA]    
       })
       .compileComponents();
-    }));
-
-    beforeEach(async(() => {
-        testHostFixture = TestBed.createComponent(TestHostComponent);
-        testHostComponent = testHostFixture.componentInstance;
-    }));
-
-    it('should have a title of Detector Positions', async(() => {
+      testHostFixture = TestBed.createComponent(TestHostComponent);
+      testHostComponent = testHostFixture.componentInstance;
       testHostComponent.forwardSolverEngineComponent.forwardSolverEngine = { 
-          value: 'DistributedPointSourceSDA', 
-          display: 'Standard Diffusion (Analytic: Distributed Point Source)' 
+        value: 'DistributedPointSourceSDA', 
+        display: 'Standard Diffusion (Analytic: Distributed Point Source)' 
       };
       testHostComponent.forwardSolverEngineComponent.gaussianBeam = {
         show: false,
         diameter: 0.1
       };
       testHostFixture.detectChanges();
-      const heading = testHostFixture.debugElement.query(By.css('.heading'));
-      expect(heading.nativeElement.innerText).toEqual('Forward Solver Engine'); //This is a bad test because the value is hard-coded
+    }));
+
+    it('should have a forward solver value of DistributedPointSourceSDA', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
+        expect(testElement.nativeElement.value).toBe('DistributedPointSourceSDA');
+      });
+    }));
+
+    it('should show the Gaussian diameter when the forward solver is changed to DistributedGaussianSourceSDA', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
+        testElement.nativeElement.value = 'DistributedGaussianSourceSDA';
+        testElement.nativeElement.dispatchEvent(new Event('change'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.forwardSolverEngineComponent.forwardSolverEngine.value).toBe('DistributedGaussianSourceSDA');
+        expect(testHostComponent.forwardSolverEngineComponent.gaussianBeam.show).toBe(true);
+      });
+    }));
+
+    it('should be able to change the Gaussian diameter to 2 when it is visible', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
+        testElement.nativeElement.value = 'DistributedGaussianSourceSDA';
+        testElement.nativeElement.dispatchEvent(new Event('change'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.forwardSolverEngineComponent.forwardSolverEngine.value).toBe('DistributedGaussianSourceSDA');
+        expect(testHostComponent.forwardSolverEngineComponent.gaussianBeam.show).toBe(true);
+        testHostFixture.whenStable().then(() => {
+          const testElement = testHostFixture.debugElement.query(By.css('#gaussianBeamDiameter'));
+          testElement.nativeElement.value = '2';
+          testElement.nativeElement.dispatchEvent(new Event('input'));
+          testHostFixture.detectChanges();
+          expect(testHostComponent.forwardSolverEngineComponent.gaussianBeam.diameter).toBe('2');
+        });
+      });
     }));
 
     @Component({

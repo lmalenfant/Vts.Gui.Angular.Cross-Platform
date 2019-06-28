@@ -53,6 +53,46 @@ describe('optical-properties component', () => {
       });
     }));
 
+    it('should allow mua to be changed to 0.1', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#mua'));
+        testElement.nativeElement.value = '0.1';
+        testElement.nativeElement.dispatchEvent(new Event('input'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.opticalPropertiesComponent.opticalProperties.mua).toBe('0.1');
+      });
+    }));
+
+    it('should allow mus` to be changed to 2', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#musp'));
+        testElement.nativeElement.value = '2';
+        testElement.nativeElement.dispatchEvent(new Event('input'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.opticalPropertiesComponent.opticalProperties.musp).toBe('2');
+      });
+    }));
+
+    it('should allow g to be changed to 0.9', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#g'));
+        testElement.nativeElement.value = '0.9';
+        testElement.nativeElement.dispatchEvent(new Event('input'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.opticalPropertiesComponent.opticalProperties.g).toBe('0.9');
+      });
+    }));
+
+    it('should allow n to be changed to 1.1', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('#n'));
+        testElement.nativeElement.value = '1.1';
+        testElement.nativeElement.dispatchEvent(new Event('input'));
+        testHostFixture.detectChanges();
+        expect(testHostComponent.opticalPropertiesComponent.opticalProperties.n).toBe('1.1');
+      });
+    }));
+
     @Component({
         selector: `host-component`,
         template: `<app-optical-properties></app-optical-properties>`,

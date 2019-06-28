@@ -14,18 +14,26 @@ describe('model-analysis-type component', () => {
         imports: [FormsModule]
       })
       .compileComponents();
-    }));
-
-    beforeEach(async(() => {
-        testHostFixture = TestBed.createComponent(TestHostComponent);
-        testHostComponent = testHostFixture.componentInstance;
-    }));
-
-    it('should have a title of Detector Positions', async(() => {
+      testHostFixture = TestBed.createComponent(TestHostComponent);
+      testHostComponent = testHostFixture.componentInstance;
       testHostComponent.modelAnalysisTypeComponent.modelAnalysisType = { value: 'R' };
       testHostFixture.detectChanges();
-      const heading = testHostFixture.debugElement.query(By.css('.heading'));
-      expect(heading.nativeElement.innerText).toEqual('Model/Analysis Output'); //This is a bad test because the value is hard-coded
+  }));
+
+    it('should have value of checked for R', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('input[name="ModelAnalysis"]'));
+        expect(testElement.nativeElement.value).toBe('R');
+      });
+    }));
+
+    it('should allow the model analysis type to be changed to ∂R/∂μs`', async(() => {
+      testHostFixture.whenStable().then(() => {
+        let options = testHostFixture.debugElement.queryAll(By.css('input[name="ModelAnalysis"]'));
+        options[2].triggerEventHandler('change', { target: options[2].nativeElement });
+        testHostFixture.detectChanges();
+        expect(testHostComponent.modelAnalysisTypeComponent.modelAnalysisType.value).toBe('dRdMusp');
+      });
     }));
 
     @Component({

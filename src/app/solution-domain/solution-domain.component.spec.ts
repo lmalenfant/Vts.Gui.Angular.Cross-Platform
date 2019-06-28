@@ -15,14 +15,8 @@ describe('solution-domain component', () => {
         schemas: [NO_ERRORS_SCHEMA]    
       })
       .compileComponents();
-    }));
-
-    beforeEach(async(() => {
-        testHostFixture = TestBed.createComponent(TestHostComponent);
-        testHostComponent = testHostFixture.componentInstance;
-    }));
-
-    it('should have a title of Solution Domain', async(() => {
+      testHostFixture = TestBed.createComponent(TestHostComponent);
+      testHostComponent = testHostFixture.componentInstance;
       testHostComponent.solutionDomainComponent.solutionDomain = { value: "rofrho" };
       testHostComponent.solutionDomainComponent.range = {
         title: 'Detector Positions',
@@ -46,8 +40,66 @@ describe('solution-domain component', () => {
         secondUnits: 'ns'
       };
       testHostFixture.detectChanges();
-      const heading = testHostFixture.debugElement.query(By.css('.heading'));
-      expect(heading.nativeElement.innerText).toEqual('Solution Domain'); //This is a bad test because the value is hard-coded
+    }));
+
+    it('should have a solution domain value of R(ρ)', async(() => {
+      testHostFixture.whenStable().then(() => {
+        const testElement = testHostFixture.debugElement.query(By.css('input[name="SolutionDomain"]'));
+        expect(testElement.nativeElement.value).toBe('rofrho');
+      });
+    }));
+
+    it('should allow the model analysis type to be changed to R(fx, t)', async(() => {
+      testHostFixture.whenStable().then(() => {
+        let options = testHostFixture.debugElement.queryAll(By.css('input[name="SolutionDomain"]'));
+        options[3].triggerEventHandler('change', { target: options[3].nativeElement });
+        options[3].nativeElement.click();
+        testHostFixture.detectChanges();
+        expect(testHostComponent.solutionDomainComponent.solutionDomain.value).toBe('roffxandt');
+      });
+    }));
+
+    it('should show the independent axis when R(fx, ft) is clicked', async(() => {
+      testHostFixture.whenStable().then(() => {
+        let options = testHostFixture.debugElement.queryAll(By.css('input[name="SolutionDomain"]'));
+        options[5].triggerEventHandler('change', { target: options[5].nativeElement });
+        options[5].nativeElement.click();
+        testHostFixture.detectChanges();
+        expect(testHostComponent.solutionDomainComponent.solutionDomain.value).toBe('roffxandft');
+        expect(testHostComponent.solutionDomainComponent.independentAxes.show).toBe(true);
+      });
+    }));
+
+    it('should have independent axes of fx and ft when R(fx, ft) is clicked', async(() => {
+      testHostFixture.whenStable().then(() => {
+        let options = testHostFixture.debugElement.queryAll(By.css('input[name="SolutionDomain"]'));
+        options[5].triggerEventHandler('change', { target: options[5].nativeElement });
+        options[5].nativeElement.click();
+        testHostFixture.detectChanges();
+        options = testHostFixture.debugElement.queryAll(By.css('input[name="IndependentAxis"]'));   
+        expect(options[0].attributes["ng-reflect-value"]).toBe('ft');
+        expect(options[1].attributes["ng-reflect-value"]).toBe('fx');
+      });
+    }));
+
+    it('should have independent axes of ρ and t and t has value 0.05 ns', async(() => {
+      testHostFixture.whenStable().then(() => {
+        let options = testHostFixture.debugElement.queryAll(By.css('input[name="SolutionDomain"]'));
+        options[2].triggerEventHandler('change', { target: options[2].nativeElement });
+        options[2].nativeElement.click();
+        testHostFixture.detectChanges();
+        options = testHostFixture.debugElement.queryAll(By.css('input[name="IndependentAxis"]'));   
+        expect(options[0].attributes["ng-reflect-value"]).toBe('t');
+        expect(options[1].attributes["ng-reflect-value"]).toBe('ρ');
+        testHostFixture.whenStable().then(() => {
+          let testElement = testHostFixture.debugElement.query(By.css('#independentAxisValue'));
+          expect(testElement.nativeElement.value).toBe('0.05');
+          testElement = testHostFixture.debugElement.query(By.css('#independentAxisLabel'));
+          expect(testElement.nativeElement.innerText).toEqual('t');
+          testElement = testHostFixture.debugElement.query(By.css('#independentAxisUnits'));
+          expect(testElement.nativeElement.innerText).toEqual('ns');
+        });
+      });
     }));
 
     @Component({
