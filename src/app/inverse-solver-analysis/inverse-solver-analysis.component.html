@@ -5,19 +5,26 @@
   <app-forward-solver-engine [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
   <br /><br /> 
   <!-- Inverse Solver Engine -->
-  <app-inverse-solver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
+  <app-inverse-slver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
   <br /><br /> 
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain>
   <br /><br /> 
+  <!-- Optimization Parameters -->
+  <app-optimization-parameters [optimizationParameters]="optimizationParameters"></app-optimization-parameters>
+  <br /><br />  
   <!-- Forward Simulation Optical Property settings -->
-  <app-optical-properties [opticalProperties]="opticalProperties"></app-optical-properties>
+  <div ng-hide="heading">
+  <app-optical-properties [opticalProperties]="forwardOpticalProperties"></app-optical-properties>
+  </div>
   <br /><br /> 
   <!-- Initial Guess Optical Property settings -->
-  <app-optical-properties [opticalProperties]="opticalProperties"></app-optical-properties>
+  <app-optical-properties [opticalProperties]="initialGuessOpticalProperties"></app-optical-properties>
   <br /><br /> 
 
-  <div class="pull-right"><button id="Measured" type="submit" class="btn btn-primary">Plot Measured Data</button></div>
-  <div class="pull-center"><button id="InitialGuess" type="submit" class="btn btn-primary">Plot Initial Guess</button></div>
-  <div class="pull-left"><button id="Simulation" type="submit" class="btn btn-primary">Run Inverse Solver</button></div>
+  <div class="pull-right">
+    <button id="Measured" type="submit" class="btn btn-primary">Plot Measured Data</button>
+    <button id="InitialGuess" type="submit" class="btn btn-primary">Plot Initial Guess</button>
+    <button id="Simulation" type="submit" class="btn btn-primary">Run Inverse Solver</button>
+  </div>
 </form>

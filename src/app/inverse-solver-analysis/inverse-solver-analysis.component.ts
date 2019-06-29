@@ -4,6 +4,7 @@ import { InverseSolverEngine } from '../inverse-solver-engine/inverse-solver-eng
 import { SolutionDomain } from '../solution-domain/solution-domain.model';
 import { IndependentAxis } from '../solution-domain/independent-axis.model';
 import { Range } from '../range/range.model';
+import { OptimizationParameters } from '../optimization-parameters/optimization-parameters.model';
 import { OpticalProperties } from '../optical-properties/optical-properties.model';
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
@@ -44,13 +45,19 @@ export class InverseSolverAnalysisComponent implements OnInit {
     numberLabel: 'Number',
     numberValue: 19
   };
-  opticalProperties: OpticalProperties = {
+  optimizationParameters: OptimizationParameters = { value: "muaandmusp"};
+  forwardOpticalProperties: OpticalProperties = {
     mua: 0.01,
     musp: 1,
     g: 0.8,
     n: 1.4
   };
-
+  initialGuessOpticalProperties: OpticalProperties = {
+    mua: 0.01,
+    musp: 1,
+    g: 0.8,
+    n: 1.4
+  };
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 
@@ -64,12 +71,14 @@ export class InverseSolverAnalysisComponent implements OnInit {
 
   onSubmit() {
     var isSettings = {
-      //forwardSolverEngine: this.forwardSolverEngine.value,
+      forwardSolverEngine: this.forwardSolverEngine.value,
       inverseSolverEngine: this.inverseSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
-      opticalProperties: this.opticalProperties
+      optimizationParameters: this.optimizationParameters.value,
+      forwardOpticalProperties: this.forwardOpticalProperties,
+      initialGuessOpticalProperties: this.initialGuessOpticalProperties
     };
     console.log(isSettings);
     console.log(JSON.stringify(isSettings));
