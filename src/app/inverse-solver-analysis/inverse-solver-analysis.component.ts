@@ -5,6 +5,7 @@ import { SolutionDomain } from '../solution-domain/solution-domain.model';
 import { IndependentAxis } from '../solution-domain/independent-axis.model';
 import { Range } from '../range/range.model';
 import { OptimizationParameters } from '../optimization-parameters/optimization-parameters.model';
+import { OptimizerType } from '../optimizer-type/optimizer-type.model';
 import { OpticalProperties } from '../optical-properties/optical-properties.model';
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
@@ -46,6 +47,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     numberValue: 19
   };
   optimizationParameters: OptimizationParameters = { value: "muaandmusp"};
+  optimizerType: OptimizerType = { value: "levenbergmarquardt"};
   forwardOpticalProperties: OpticalProperties = {
     mua: 0.01,
     musp: 1,
@@ -77,6 +79,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       independentAxes: this.independentAxes,
       range: this.range,
       optimizationParameters: this.optimizationParameters.value,
+      optimzerType: this.optimizerType.value,
       forwardOpticalProperties: this.forwardOpticalProperties,
       initialGuessOpticalProperties: this.initialGuessOpticalProperties
     };

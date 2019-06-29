@@ -3,21 +3,24 @@
  -->
   <!-- Forward Solver Engine -->
   <app-forward-solver-engine [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
-  <br /><br /> 
+
   <!-- Inverse Solver Engine -->
-  <app-inverse-slver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
-  <br /><br /> 
+  <app-inverse-solver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
+
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain>
-  <br /><br /> 
+
   <!-- Optimization Parameters -->
   <app-optimization-parameters [optimizationParameters]="optimizationParameters"></app-optimization-parameters>
-  <br /><br />  
+
+  <!-- Optimizer Type -->
+  <app-optimizer-type [optimizerType]="optimizerType"></app-optimizer-type>
+  
   <!-- Forward Simulation Optical Property settings -->
   <div ng-hide="heading">
   <app-optical-properties [opticalProperties]="forwardOpticalProperties"></app-optical-properties>
   </div>
-  <br /><br /> 
+
   <!-- Initial Guess Optical Property settings -->
   <app-optical-properties [opticalProperties]="initialGuessOpticalProperties"></app-optical-properties>
   <br /><br /> 
