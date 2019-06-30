@@ -18,12 +18,13 @@ import { PlotObject } from '../plot/plot-object.model';
 
 /** inverse-solver-analysis component*/
 export class InverseSolverAnalysisComponent implements OnInit {
-  forwardSolverEngine: ForwardSolverEngine = { 
-    value: 'DistributedPointSourceSDA', 
+    forwardSolverEngine: ForwardSolverEngine = { 
+    value: 'IsotropicPointSourceSDA', 
     display: 'Standard Diffusion (Analytic: Isotropic Point Source)'};
-  inverseSolverEngine: InverseSolverEngine = { 
+  /** inverseSolverEngine: InverseSolverEngine = { 
     value: 'DistributedPointSourceSDA', 
-    display: 'Standard Diffusion (Analytic: Isotropic Point Source)' }; 
+    display: 'Standard Diffusion (Analytic: Isotropic Point Source)' };
+    */ 
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
     show: false,
@@ -71,21 +72,49 @@ export class InverseSolverAnalysisComponent implements OnInit {
     this.plotData.newPlotObject.subscribe(plotObject => this.plotObject = plotObject);
   }
 
-  onSubmit() {
-    var isSettings = {
+  plotMeasured() {    
+    var fsSettings = {
       forwardSolverEngine: this.forwardSolverEngine.value,
-      inverseSolverEngine: this.inverseSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
-      optimizationParameters: this.optimizationParameters.value,
-      optimzerType: this.optimizerType.value,
       forwardOpticalProperties: this.forwardOpticalProperties,
-      initialGuessOpticalProperties: this.initialGuessOpticalProperties
     };
-    console.log(isSettings);
-    console.log(JSON.stringify(isSettings));
-    this.plotData.getPlotData(isSettings).subscribe((data: any) => {
+    console.log(fsSettings);
+    console.log(JSON.stringify(fsSettings));
+    this.plotData.getPlotData(fsSettings).subscribe((data: any) => {
+      //this.plotObject = data;
+      this.plotData.addNewPlot(data);
+    });
+  }
+    
+  plotInitialGuess() {    
+    var igSettings = {
+      forwardSolverEngine: this.forwardSolverEngine.value,
+      solutionDomain: this.solutionDomain.value,
+      independentAxes: this.independentAxes,
+      range: this.range,
+      forwardOpticalProperties: this.initialGuessOpticalProperties,
+    };
+    console.log(igSettings);
+    console.log(JSON.stringify(igSettings));
+    this.plotData.getPlotData(igSettings).subscribe((data: any) => {
+      //this.plotObject = data;
+      this.plotData.addNewPlot(data);
+    });
+  }
+
+    runInverse() {    
+    var inSettings = {
+      forwardSolverEngine: this.forwardSolverEngine.value,
+      solutionDomain: this.solutionDomain.value,
+      independentAxes: this.independentAxes,
+      range: this.range,
+      forwardOpticalProperties: this.initialGuessOpticalProperties,
+    };
+    console.log(inSettings);
+    console.log(JSON.stringify(inSettings));
+    this.plotData.getPlotData(inSettings).subscribe((data: any) => {
       //this.plotObject = data;
       this.plotData.addNewPlot(data);
     });

@@ -4,30 +4,37 @@
   <!-- Forward Solver Engine -->
   <app-forward-solver-engine [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
 
-  <!-- Inverse Solver Engine -->
+  <!-- Inverse Solver Engine 
   <app-inverse-solver-engine [inverseSolverEngine]="inverseSolverEngine"></app-inverse-solver-engine>
-
+-->
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain>
+  <br /><br /> 
 
   <!-- Optimization Parameters -->
   <app-optimization-parameters [optimizationParameters]="optimizationParameters"></app-optimization-parameters>
 
   <!-- Optimizer Type -->
   <app-optimizer-type [optimizerType]="optimizerType"></app-optimizer-type>
-  
+  <br /><br /> 
+
   <!-- Forward Simulation Optical Property settings -->
-  <div ng-hide="heading">
   <app-optical-properties [opticalProperties]="forwardOpticalProperties"></app-optical-properties>
-  </div>
 
   <!-- Initial Guess Optical Property settings -->
   <app-optical-properties [opticalProperties]="initialGuessOpticalProperties"></app-optical-properties>
   <br /><br /> 
 
   <div class="pull-right">
-    <button id="Measured" type="submit" class="btn btn-primary">Plot Measured Data</button>
-    <button id="InitialGuess" type="submit" class="btn btn-primary">Plot Initial Guess</button>
-    <button id="Simulation" type="submit" class="btn btn-primary">Run Inverse Solver</button>
+    <!-- should the following text box be in a separate class? -->
+    <div class="input-group input-group-sm mr-sm-2">
+      <div class="input-group-prepend">
+        <span id="noiseLabel" class="input-group-text">% noise</span>
+      </div>
+    <input id="noiseValue" name="noiseValue" type="text" class="form-control" [(ngModel)]="inverse-solver-analysis.noiseValue" />
+    </div> 
+    <button id="Measured" type="submit" class="btn btn-primary" ng-click="plotMeasured()">Plot Measured Data</button>&nbsp;
+    <button id="InitialGuess" type="submit" class="btn btn-primary" ng-click="plotInitialGuess()">Plot Initial Guess</button>&nbsp;
+    <button id="Simulation" type="submit" class="btn btn-primary" ng-click="runInverse()">Run Inverse Solver</button>
   </div>
 </form>
