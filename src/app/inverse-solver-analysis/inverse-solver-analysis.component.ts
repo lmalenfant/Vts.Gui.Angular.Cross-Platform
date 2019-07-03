@@ -18,13 +18,13 @@ import { PlotObject } from '../plot/plot-object.model';
 
 /** inverse-solver-analysis component*/
 export class InverseSolverAnalysisComponent implements OnInit {
-    forwardSolverEngine: ForwardSolverEngine = { 
-    value: 'IsotropicPointSourceSDA', 
-    display: 'Standard Diffusion (Analytic: Isotropic Point Source)'};
-  /** inverseSolverEngine: InverseSolverEngine = { 
+  forwardSolverEngine: ForwardSolverEngine = { 
     value: 'DistributedPointSourceSDA', 
-    display: 'Standard Diffusion (Analytic: Isotropic Point Source)' };
-    */ 
+    display: 'Standard Diffusion (Analytic: Distributed Point Source)'};
+  inverseSolverEngine: InverseSolverEngine = { 
+    value: 'DistributtedPointSourceSDA', 
+    display: 'Standard Diffusion (Analytic: Distributed Point Source)' };
+     
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
     show: false,
@@ -61,6 +61,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     g: 0.8,
     n: 1.4
   };
+  noiseValue: { value: 0 };
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 
@@ -71,6 +72,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
   ngOnInit() {
     this.plotData.newPlotObject.subscribe(plotObject => this.plotObject = plotObject);
   }
+
 
   plotMeasured() {    
     var fsSettings = {
@@ -104,7 +106,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     });
   }
 
-    runInverse() {    
+  runInverse() {    
     var inSettings = {
       forwardSolverEngine: this.forwardSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
