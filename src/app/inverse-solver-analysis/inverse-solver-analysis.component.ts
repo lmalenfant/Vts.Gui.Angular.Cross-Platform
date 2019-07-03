@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
 import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
+import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.model';
 import { InverseSolverEngine } from '../inverse-solver-engine/inverse-solver-engine.model';
 import { SolutionDomain } from '../solution-domain/solution-domain.model';
 import { IndependentAxis } from '../solution-domain/independent-axis.model';
@@ -55,18 +56,21 @@ export class InverseSolverAnalysisComponent implements OnInit {
   optimizationParameters: OptimizationParameters = { value: "muaandmusp"};
   optimizerType: OptimizerType = { value: "levenbergmarquardt"};
   forwardOpticalProperties: OpticalProperties = {
+    title: 'Forward Simulation Optical Properties',
     mua: 0.01,
     musp: 1,
     g: 0.8,
     n: 1.4
   };
   initialGuessOpticalProperties: OpticalProperties = {
+    title: 'Initial Guess Optical Properties',
     mua: 0.01,
     musp: 1,
     g: 0.8,
     n: 1.4
   };
-  noiseValue: { value: "0" };
+  modelAnalysisType: ModelAnalysisType = { value: 'R'};
+  noiseValue: { value: 0 };
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 
@@ -86,6 +90,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       independentAxes: this.independentAxes,
       range: this.range,
       forwardOpticalProperties: this.forwardOpticalProperties,
+      modelAnalysis: this.modelAnalysisType.value
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
@@ -97,11 +102,12 @@ export class InverseSolverAnalysisComponent implements OnInit {
     
   plotInitialGuess() {    
     var igSettings = {
-      forwardSolverEngine: this.forwardSolverEngine.value,
+      forwardSolverEngine: this.inverseSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
       forwardOpticalProperties: this.initialGuessOpticalProperties,
+      modelAnalysis: this.modelAnalysisType.value
     };
     console.log(igSettings);
     console.log(JSON.stringify(igSettings));

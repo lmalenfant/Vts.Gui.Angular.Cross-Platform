@@ -9,13 +9,15 @@
 
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain> 
+  <br /><br /> 
 
   <!-- Optimization Parameters -->
   <app-optimization-parameters [optimizationParameters]="optimizationParameters"></app-optimization-parameters>
 
   <!-- Optimizer Type -->
   <app-optimizer-type [optimizerType]="optimizerType"></app-optimizer-type>
-
+  <br /><br /> 
+  
   <!-- Forward Simulation Optical Property settings -->
   <app-optical-properties [opticalProperties]="forwardOpticalProperties"></app-optical-properties>
 
@@ -29,7 +31,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">% noise</span>
       </div>
-      <input type="text" class="form-control noise" name="noiseValue" />
+      <input type="text" class="form-control noise" [(ngModel)]="noiseValue" name="noise"/>
     </div> 
     <button id="Measured" type="submit" class="btn btn-primary" (click)="plotMeasured()">Plot Measured Data</button>&nbsp;
     <button id="InitialGuess" type="submit" class="btn btn-primary" (click)="plotInitialGuess()">Plot Initial Guess</button>&nbsp;
