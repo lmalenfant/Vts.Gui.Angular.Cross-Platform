@@ -17,8 +17,8 @@ export class InverseSolverEngineComponent {
   }
 
  onChange(value) {
-    console.log(this.inverseSolverEngine.value);
     console.log(value);
     this.inverseSolverEngine.value = value;
+    console.log(this.inverseSolverEngine.value);
   } 
 }

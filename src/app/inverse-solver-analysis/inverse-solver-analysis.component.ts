@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
+import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
 import { InverseSolverEngine } from '../inverse-solver-engine/inverse-solver-engine.model';
 import { SolutionDomain } from '../solution-domain/solution-domain.model';
 import { IndependentAxis } from '../solution-domain/independent-axis.model';
@@ -19,11 +20,15 @@ import { PlotObject } from '../plot/plot-object.model';
 /** inverse-solver-analysis component*/
 export class InverseSolverAnalysisComponent implements OnInit {
   forwardSolverEngine: ForwardSolverEngine = { 
-    value: 'DistributedPointSourceSDA', 
-    display: 'Standard Diffusion (Analytic: Distributed Point Source)'};
+    value: 'PointSourceSDA', 
+    display: 'Standard Diffusion (Analytic: Isotropic Point Source)'};
+  gaussianBeam: GaussianBeam = {
+    show: false,
+    diameter: 0.1
+  };
   inverseSolverEngine: InverseSolverEngine = { 
-    value: 'DistributtedPointSourceSDA', 
-    display: 'Standard Diffusion (Analytic: Distributed Point Source)' };
+    value: 'PointSourceSDA', 
+    display: 'Standard Diffusion (Analytic: Isotropic Point Source)' };
      
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
@@ -61,7 +66,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     g: 0.8,
     n: 1.4
   };
-  noiseValue: { value: 0 };
+  noiseValue: { value: "0" };
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 

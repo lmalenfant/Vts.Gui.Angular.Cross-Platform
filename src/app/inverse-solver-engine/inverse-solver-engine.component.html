@@ -1,4 +1,4 @@
-<div class="reset">
+<div class="reset">  
   <div class="heading">Inv Solver:</div>
   <select id="inverseSolverEngine" class="form-control form-control-sm" [ngModel]="inverseSolverEngine.value" (ngModelChange)="onChange($event)">
     <option *ngFor="let is of inverseSolverEngineList" [value]="is.value">{{is.display}}</option>
