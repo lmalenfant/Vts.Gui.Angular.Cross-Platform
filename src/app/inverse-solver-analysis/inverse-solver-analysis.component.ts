@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import {FormsModule} from '@angular/forms'
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
 import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
 import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.model';
@@ -70,7 +71,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     n: 1.4
   };
   modelAnalysisType: ModelAnalysisType = { value: 'R'};
-  noiseValue: { value: 0 };
+  noiseValue = '0';
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 

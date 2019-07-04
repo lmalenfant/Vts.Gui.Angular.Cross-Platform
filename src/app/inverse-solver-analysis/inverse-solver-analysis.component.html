@@ -17,9 +17,11 @@
   <!-- Optimizer Type -->
   <app-optimizer-type [optimizerType]="optimizerType"></app-optimizer-type>
   <br /><br /> 
-  
+
   <!-- Forward Simulation Optical Property settings -->
   <app-optical-properties [opticalProperties]="forwardOpticalProperties"></app-optical-properties>
+  
+  <br /><br />
 
   <!-- Initial Guess Optical Property settings -->
   <app-optical-properties [opticalProperties]="initialGuessOpticalProperties"></app-optical-properties>
@@ -27,11 +29,11 @@
 
   <div class="pull-right">
     <!-- should the following text box be in a separate class? -->
-    <div class="input-group input-group-sm noise">
+    <div class="input-group input-group-sm">
       <div class="input-group-prepend">
         <span class="input-group-text">% noise</span>
       </div>
-      <input type="text" class="form-control noise" [(ngModel)]="noiseValue" name="noise"/>
+      <input id="noiseValue" name="noiseValue" type="text" class="form-control" [(ngModel)]="noiseValue"/>
     </div> 
     <button id="Measured" type="submit" class="btn btn-primary" (click)="plotMeasured()">Plot Measured Data</button>&nbsp;
     <button id="InitialGuess" type="submit" class="btn btn-primary" (click)="plotInitialGuess()">Plot Initial Guess</button>&nbsp;
