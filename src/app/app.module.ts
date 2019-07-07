@@ -11,7 +11,6 @@ import { InverseSolverAnalysisComponent } from './inverse-solver-analysis/invers
 import { ForwardSolverAnalysisComponent } from './forward-solver-analysis/forward-solver-analysis.component';
 import { ModelAnalysisTypeComponent } from './model-analysis-type/model-analysis-type.component';
 import { ForwardSolverEngineComponent } from './forward-solver-engine/forward-solver-engine.component';
-import { InverseSolverEngineComponent } from './inverse-solver-engine/inverse-solver-engine.component';
 import { OptimizationParametersComponent } from './optimization-parameters/optimization-parameters.component';
 import { OptimizerTypeComponent } from './optimizer-type/optimizer-type.component';
 import { PlotComponent } from './plot/plot.component';
@@ -28,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
     ForwardSolverAnalysisComponent,
     ModelAnalysisTypeComponent,
     ForwardSolverEngineComponent,
-    InverseSolverEngineComponent,
     OptimizationParametersComponent,
     OptimizerTypeComponent,
     PlotComponent,

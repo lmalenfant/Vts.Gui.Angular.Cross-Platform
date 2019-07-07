@@ -3,7 +3,6 @@ import {FormsModule} from '@angular/forms'
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
 import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
 import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.model';
-import { InverseSolverEngine } from '../inverse-solver-engine/inverse-solver-engine.model';
 import { SolutionDomain } from '../solution-domain/solution-domain.model';
 import { IndependentAxis } from '../solution-domain/independent-axis.model';
 import { Range } from '../range/range.model';
@@ -28,10 +27,13 @@ export class InverseSolverAnalysisComponent implements OnInit {
     show: false,
     diameter: 0.1
   };
-  inverseSolverEngine: InverseSolverEngine = { 
+  inverseSolverEngine: ForwardSolverEngine = { 
     value: 'PointSourceSDA', 
     display: 'Standard Diffusion (Analytic: Isotropic Point Source)' };
-     
+  inverseGaussianBeam: GaussianBeam = {
+    show: false,
+    diameter: 0.1
+  };
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
     show: false,
@@ -76,7 +78,6 @@ export class InverseSolverAnalysisComponent implements OnInit {
   //plotObjects: Array<PlotObject>;
 
   constructor(private plotData: PlotService) {
-
   }
 
   ngOnInit() {
