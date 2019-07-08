@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms'
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
+import { InverseSolverEngineList } from './inverse-solver-analysis-list';
 import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
 import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.model';
 import { SolutionDomain } from '../solution-domain/solution-domain.model';
@@ -27,6 +28,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     show: false,
     diameter: 0.1
   };
+  fsEngineList = InverseSolverEngineList;
   inverseSolverEngine: ForwardSolverEngine = { 
     value: 'PointSourceSDA', 
     display: 'Standard Diffusion (Analytic: Isotropic Point Source)' };
@@ -34,6 +36,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     show: false,
     diameter: 0.1
   };
+  isEngineList = InverseSolverEngineList;
   solutionDomain: SolutionDomain = { value: "rofrho" };
   independentAxes: IndependentAxis = {
     show: false,

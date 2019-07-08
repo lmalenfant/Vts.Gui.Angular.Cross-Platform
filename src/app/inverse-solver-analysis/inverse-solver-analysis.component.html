@@ -3,13 +3,13 @@
  -->
   <!-- Forward Solver Engine -->
    <div class="heading">Fwd Solver</div>
-  <app-forward-solver-engine [gaussianBeam]="gaussianBeam" [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
+  <app-forward-solver-engine [forwardSolverEngineList]="fsEngineList" [gaussianBeam]="gaussianBeam" [forwardSolverEngine]="forwardSolverEngine"></app-forward-solver-engine>
 
   <!-- Inverse Solver Engine -->
    <div class="heading">Inv Solver</div>
-  <app-forward-solver-engine [gaussianBeam]="inverseGaussianBeam" [forwardSolverEngine]="inverseSolverEngine"></app-forward-solver-engine>
+  <app-forward-solver-engine [forwardSolverEngineList]="isEngineList" [gaussianBeam]="inverseGaussianBeam" [forwardSolverEngine]="inverseSolverEngine"></app-forward-solver-engine>
    <br /><br />
-   
+
   <!-- Solution Domain selection -->
   <app-solution-domain [independentAxes]="independentAxes" [solutionDomain]="solutionDomain" [range]="range"></app-solution-domain> 
   <br /><br /> 
