@@ -94,7 +94,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
-      forwardOpticalProperties: this.forwardOpticalProperties,
+      opticalProperties: this.forwardOpticalProperties,
       modelAnalysis: this.modelAnalysisType.value
     };
     console.log(fsSettings);
@@ -111,7 +111,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
-      forwardOpticalProperties: this.initialGuessOpticalProperties,
+      opticalProperties: this.initialGuessOpticalProperties,
       modelAnalysis: this.modelAnalysisType.value
     };
     console.log(igSettings);
@@ -125,10 +125,12 @@ export class InverseSolverAnalysisComponent implements OnInit {
   runInverse() {    
     var inSettings = {
       forwardSolverEngine: this.forwardSolverEngine.value,
+      optimizerType: this.optimizerType.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
       range: this.range,
-      forwardOpticalProperties: this.initialGuessOpticalProperties,
+      inverseSolverEngine: this.inverseSolverEngine.value,
+      opticalProperties: this.initialGuessOpticalProperties,
     };
     console.log(inSettings);
     console.log(JSON.stringify(inSettings));
