@@ -16,7 +16,7 @@ describe('plot service', () => {
         httpMock.verify();
       }));
 
-    it('expects service to fetch data',
+    it('should fetch data',
         inject([HttpTestingController, PlotService],
         (httpMock: HttpTestingController, service: PlotService) => {
             // set the test parameters
