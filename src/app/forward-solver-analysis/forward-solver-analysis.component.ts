@@ -17,12 +17,13 @@ import * as $ from 'jquery';
 })
 /** forward-solver-analysis component*/
 export class ForwardSolverAnalysisComponent implements OnInit {
+  id: string = 'Forward';
   forwardSolverEngine: ForwardSolverEngine = { value: 'DistributedPointSourceSDA', display: 'Standard Diffusion (Analytic: Distributed Point Source)' };
   gaussianBeam: GaussianBeam = {
     show: false,
     diameter: 0.1
   };
-  solutionDomain: SolutionDomain = { value: "rofrho" };
+  solutionDomain: SolutionDomain = { value: 'ROfRho' };
   independentAxes: IndependentAxis = {
     show: false,
     first: 'ρ',
@@ -37,12 +38,12 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     title: 'Detector Positions',
     startLabel: 'Begin',
     startLabelUnits: 'mm',
-    startValue: 0.5,
+    start: 0.5,
     endLabel: 'End',
     endLabelUnits: 'mm',
-    endValue: 9.5,
+    stop: 9.5,
     numberLabel: 'Number',
-    numberValue: 19
+    count: 19
   };
   opticalProperties: OpticalProperties = {
     title: 'Optical Properties',
@@ -52,6 +53,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     n: 1.4
   };
   modelAnalysisType: ModelAnalysisType = { value: 'R' };
+  noiseValue = '0'; // always set to 0 for fs
 
   plotObject: PlotObject;
   //plotObjects: Array<PlotObject>;
@@ -66,16 +68,17 @@ export class ForwardSolverAnalysisComponent implements OnInit {
 
   onSubmit() {
     var fsSettings = {
-      forwardSolverEngine: this.forwardSolverEngine.value,
+      forwardSolverType: this.forwardSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
-      range: this.range,
+      xAxis: this.range,
       opticalProperties: this.opticalProperties,
-      modelAnalysis: this.modelAnalysisType.value
+      modelAnalysis: this.modelAnalysisType.value,
+      noiseValue: this.noiseValue
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
-    this.plotData.getPlotData(fsSettings).subscribe((data: any) => {
+    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
       this.plotData.addNewPlot(data);

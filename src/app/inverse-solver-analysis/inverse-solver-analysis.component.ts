@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms'
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
 import { InverseSolverEngineList } from './inverse-solver-analysis-list';
@@ -21,6 +21,7 @@ import { PlotObject } from '../plot/plot-object.model';
 
 /** inverse-solver-analysis component*/
 export class InverseSolverAnalysisComponent implements OnInit {
+  id: string = 'Inverse';
   forwardSolverEngine: ForwardSolverEngine = { 
     value: 'PointSourceSDA', 
     display: 'Standard Diffusion (Analytic: Isotropic Point Source)'};
@@ -37,7 +38,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     diameter: 0.1
   };
   isEngineList = InverseSolverEngineList;
-  solutionDomain: SolutionDomain = { value: "rofrho" };
+  solutionDomain: SolutionDomain = { value: 'ROfRho' };
   independentAxes: IndependentAxis = {
     show: false,
     first: 'ρ',
@@ -52,15 +53,15 @@ export class InverseSolverAnalysisComponent implements OnInit {
     title: 'Detector Positions',
     startLabel: 'Begin',
     startLabelUnits: 'mm',
-    startValue: 0.5,
+    start: 0.5,
     endLabel: 'End',
     endLabelUnits: 'mm',
-    endValue: 9.5,
+    stop: 9.5,
     numberLabel: 'Number',
-    numberValue: 19
+    count: 19
   };
-  optimizationParameters: OptimizationParameters = { value: "muaandmusp"};
-  optimizerType: OptimizerType = { value: "levenbergmarquardt"};
+  optimizationParameters: OptimizationParameters = { value: 'MuaMusp' };
+  optimizerType: OptimizerType = { value: 'MPFitLevenbergMarquardt' };
   forwardOpticalProperties: OpticalProperties = {
     title: 'Forward Simulation Optical Properties',
     mua: 0.01,
@@ -77,6 +78,9 @@ export class InverseSolverAnalysisComponent implements OnInit {
   };
   modelAnalysisType: ModelAnalysisType = { value: 'R'};
   noiseValue = '0';
+  
+  measuredData: number[][];
+
   plotObject: PlotObject; 
   //plotObjects: Array<PlotObject>;
 
@@ -90,33 +94,37 @@ export class InverseSolverAnalysisComponent implements OnInit {
 
   plotMeasured() {    
     var fsSettings = {
-      forwardSolverEngine: this.forwardSolverEngine.value,
+      forwardSolverType: this.forwardSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
-      range: this.range,
+      xAxis: this.range,
       opticalProperties: this.forwardOpticalProperties,
-      modelAnalysis: this.modelAnalysisType.value
+      modelAnalysis: this.modelAnalysisType.value,
+      noiseValue: this.noiseValue
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
-    this.plotData.getPlotData(fsSettings).subscribe((data: any) => {
+    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       //this.plotObject = data;
       this.plotData.addNewPlot(data);
+      this.measuredData = data.PlotList[0].Data;
     });
   }
     
   plotInitialGuess() {    
     var igSettings = {
-      forwardSolverEngine: this.inverseSolverEngine.value,
+      forwardSolverType: this.inverseSolverEngine.value,
+      forwardOpticalProperties: this.forwardOpticalProperties,
       solutionDomain: this.solutionDomain.value,
       independentAxes: this.independentAxes,
-      range: this.range,
+      xAxis: this.range,
       opticalProperties: this.initialGuessOpticalProperties,
-      modelAnalysis: this.modelAnalysisType.value
+      modelAnalysis: this.modelAnalysisType.value,
+      noiseValue: "0"
     };
     console.log(igSettings);
     console.log(JSON.stringify(igSettings));
-    this.plotData.getPlotData(igSettings).subscribe((data: any) => {
+    this.plotData.getPlotData(igSettings, "forward").subscribe((data: any) => {
       //this.plotObject = data;
       this.plotData.addNewPlot(data);
     });
@@ -124,17 +132,18 @@ export class InverseSolverAnalysisComponent implements OnInit {
 
   runInverse() {    
     var inSettings = {
-      forwardSolverEngine: this.forwardSolverEngine.value,
+      inverseSolverType: this.inverseSolverEngine.value,
       optimizerType: this.optimizerType.value,
+      optimizationParameters: this.optimizationParameters.value,
       solutionDomain: this.solutionDomain.value,
+      measuredData: this.measuredData,
       independentAxes: this.independentAxes,
-      range: this.range,
-      inverseSolverEngine: this.inverseSolverEngine.value,
+      xAxis: this.range,
       opticalProperties: this.initialGuessOpticalProperties,
     };
     console.log(inSettings);
     console.log(JSON.stringify(inSettings));
-    this.plotData.getPlotData(inSettings).subscribe((data: any) => {
+    this.plotData.getPlotData(inSettings, "inverse").subscribe((data: any) => {
       //this.plotObject = data;
       this.plotData.addNewPlot(data);
     });

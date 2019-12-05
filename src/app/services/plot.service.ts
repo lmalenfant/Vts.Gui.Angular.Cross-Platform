@@ -21,9 +21,10 @@ export class PlotService {
   private singlePlotDataSource = new BehaviorSubject(new PlotObject);
   newPlotObject = this.singlePlotDataSource.asObservable();
 
-  url = "https://vtsapi.azurewebsites.net/api/v1/values";
+  baseUrl = "api/v1/";
+  //url = "https://vtsapi.azurewebsites.net/api/v1/values";
 
-  getPlotData(fsSettings) {
+  getPlotData(settings, endpoint) {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -31,13 +32,19 @@ export class PlotService {
         'X-API-KEY': '$RFGT%^H',
       }),
     }
-    return this.http.post(this.url, JSON.stringify(fsSettings), options);
+    let url = this.baseUrl + endpoint;
+    return this.http.post(url, JSON.stringify(settings), options);
   }
 
   addNewPlot(data: PlotObject) {
     if (this.groupPlots) {
-      data.Id = data.YAxis + data.XAxis;
-      data.Detector = "R(" + data.XAxis + ")"
+      if (data.Id.startsWith("Spectral")) {
+        data.Id = "Spectral";
+        data.Detector = "Spectral (μa/μs')"
+      } else {
+        data.Id = data.YAxis + data.XAxis;
+        data.Detector = "R(" + data.XAxis + ")"
+      }
     }
     if (typeof (this.plotObjects) === 'undefined') {
       this.plotObjects = [data];

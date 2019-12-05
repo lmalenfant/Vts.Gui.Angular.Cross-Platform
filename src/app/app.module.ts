@@ -9,6 +9,8 @@ import { OpticalPropertiesComponent } from './optical-properties/optical-propert
 import { SolutionDomainComponent } from './solution-domain/solution-domain.component';
 import { InverseSolverAnalysisComponent } from './inverse-solver-analysis/inverse-solver-analysis.component';
 import { ForwardSolverAnalysisComponent } from './forward-solver-analysis/forward-solver-analysis.component';
+import { SpectralComponent } from './spectral/spectral.component';
+import { TissueDefinitionComponent } from './tissue-definition/tissue-definition.component';
 import { ModelAnalysisTypeComponent } from './model-analysis-type/model-analysis-type.component';
 import { ForwardSolverEngineComponent } from './forward-solver-engine/forward-solver-engine.component';
 import { OptimizationParametersComponent } from './optimization-parameters/optimization-parameters.component';
@@ -16,6 +18,8 @@ import { OptimizerTypeComponent } from './optimizer-type/optimizer-type.componen
 import { PlotComponent } from './plot/plot.component';
 import { PlotService } from './services/plot.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ScattererTypeComponent } from './scatterer-type/scatterer-type.component';
+import { SingleWavelengthCalculatorComponent } from './single-wavelength-calculator/single-wavelength-calculator.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
     SolutionDomainComponent,
     InverseSolverAnalysisComponent,
     ForwardSolverAnalysisComponent,
+    SpectralComponent,
+    ScattererTypeComponent,
+    SingleWavelengthCalculatorComponent,
+    TissueDefinitionComponent,
     ModelAnalysisTypeComponent,
     ForwardSolverEngineComponent,
     OptimizationParametersComponent,
