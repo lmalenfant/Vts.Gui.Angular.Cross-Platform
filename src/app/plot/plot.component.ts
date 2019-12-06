@@ -6,8 +6,7 @@ declare const plotAccordingToChoices: any;
 
 @Component({
   selector: 'app-plot',
-  templateUrl: './plot.component.html',
-  styleUrls: ['./plot.component.css']
+  templateUrl: './plot.component.html'
 })
 /** plot component*/
 export class PlotComponent implements OnInit {

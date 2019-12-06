@@ -12,8 +12,7 @@ import * as $ from 'jquery';
 
 @Component({
     selector: 'app-spectral',
-    templateUrl: './spectral.component.html',
-    styleUrls: ['./spectral.component.css']
+    templateUrl: './spectral.component.html'
 })
 /** spectral component*/
 export class SpectralComponent {
