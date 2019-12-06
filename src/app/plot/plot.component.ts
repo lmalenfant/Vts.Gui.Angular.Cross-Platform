@@ -37,8 +37,6 @@ export class PlotComponent implements OnInit {
   ngOnInit() {
     this.plotData.currentPlotObjects.subscribe(plotObjects => {
       this.plotObjects = plotObjects;
-      if (typeof (this.plotObjects) !== 'undefined' && this.plotObjects.length > 1) {
-      }
     });
     this.plotData.newPlotObject.subscribe(plotObject => this.plotObject = plotObject);
     this.plotData.groupPlots = $("#group-plots").is(":checked");
