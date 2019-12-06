@@ -22,7 +22,7 @@ export class SpectralComponent {
   scattererTypeDropdown: ListType = { value: 'PowerLaw', display: 'PowerLaw [A*λ^(-b)]' };
   powerLaw: PowerLaw = { a: 1.2, b: 1.42, show: true };
   intralipid: Intralipid = { volumeFraction: 0.01, show: false };
-  mieParticle: MieParticle = { particleRadius: 0.5, ParticleRefractiveIndexMismatch: 1.4, MediumRefractiveIndexMismatch: 1, volumeFraction: 0.01, show: false };
+  mieParticle: MieParticle = { particleRadius: 0.5, particleRefractiveIndex: 1.4, mediumRefractiveIndex: 1, volumeFraction: 0.01, show: false };
   range: Range = {
     title: 'Wavelength Range',
     startLabel: 'Begin',
