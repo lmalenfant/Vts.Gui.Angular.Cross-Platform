@@ -80,7 +80,14 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
-      this.plotData.addNewPlot(data);
+      let plotObject = new PlotObject();
+      plotObject.Detector = fsSettings.solutionDomain;
+      plotObject.Id = "R(" + fsSettings.independentAxes.first + "," + fsSettings.independentAxes.second + ")";
+      plotObject.Legend = "R(" + fsSettings.independentAxes.first + "," + fsSettings.independentAxes.second + ")";;
+      plotObject.XAxis = fsSettings.independentAxes.label == fsSettings.independentAxes.first ? fsSettings.independentAxes.second : fsSettings.independentAxes.first;
+      plotObject.YAxis = "Reflectance";
+      plotObject.PlotList = data.PlotList;
+      this.plotData.addNewPlot(plotObject);
     });
   }
 }

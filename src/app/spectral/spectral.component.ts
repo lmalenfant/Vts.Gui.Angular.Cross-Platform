@@ -9,6 +9,7 @@ import { IntralipidScatterer as Intralipid } from '../scatterer-type/intralipid.
 import { MieScatterer as MieParticle } from '../scatterer-type/mie-particle.model';
 import { PlotService } from '../services/plot.service';
 import * as $ from 'jquery';
+import { PlotObject } from '../plot/plot-object.model';
 
 @Component({
     selector: 'app-spectral',
@@ -67,7 +68,14 @@ export class SpectralComponent {
     this.plotData.getPlotData(spectralSettings, "spectral").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
-      this.plotData.addNewPlot(data);
+      let plotObject = new PlotObject();
+      plotObject.Detector = "Spectral" + spectralSettings.spectralPlotType;
+      plotObject.Id = "Spectral" + spectralSettings.plotName;
+      plotObject.Legend = "Spectral";
+      plotObject.XAxis = "λ";
+      plotObject.YAxis = "Reflectance";
+      plotObject.PlotList = data.PlotList;
+      this.plotData.addNewPlot(plotObject);
     });
   }
 
