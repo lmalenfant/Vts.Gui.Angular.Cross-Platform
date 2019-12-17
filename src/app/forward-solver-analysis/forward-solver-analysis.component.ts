@@ -83,7 +83,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
       let plotObject = new PlotObject();
       plotObject.Detector = fsSettings.solutionDomain;
       plotObject.Id = "R(" + fsSettings.independentAxes.first + "," + fsSettings.independentAxes.second + ")";
-      plotObject.Legend = "R(" + fsSettings.independentAxes.first + "," + fsSettings.independentAxes.second + ")";;
+      plotObject.Legend = "R(" + fsSettings.independentAxes.first + "," + fsSettings.independentAxes.second + ")";
       plotObject.XAxis = fsSettings.independentAxes.label == fsSettings.independentAxes.first ? fsSettings.independentAxes.second : fsSettings.independentAxes.first;
       plotObject.YAxis = "Reflectance";
       plotObject.PlotList = data.PlotList;

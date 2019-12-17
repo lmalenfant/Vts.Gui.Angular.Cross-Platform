@@ -147,7 +147,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       let plotObject = new PlotObject();
       plotObject.Detector = inSettings.solutionDomain;
       plotObject.Id = "R(" + inSettings.independentAxes.first + "," + inSettings.independentAxes.second + ")";
-      plotObject.Legend = "R(" + inSettings.independentAxes.first + "," + inSettings.independentAxes.second + ")";;
+      plotObject.Legend = "R(" + inSettings.independentAxes.first + "," + inSettings.independentAxes.second + ")";
       plotObject.XAxis = inSettings.independentAxes.label == inSettings.independentAxes.first ? inSettings.independentAxes.second : inSettings.independentAxes.first;
       plotObject.YAxis = "Reflectance";
       plotObject.PlotList = data.PlotList;
