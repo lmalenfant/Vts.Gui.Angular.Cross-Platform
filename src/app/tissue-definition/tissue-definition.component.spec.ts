@@ -58,7 +58,7 @@ describe('tissue-definition component', () => {
     template: `<app-tissue-definition></app-tissue-definition>`,
   })
   class TestHostComponent {
-    @ViewChild(TissueDefinitionComponent)
+    @ViewChild(TissueDefinitionComponent, /* TODO: add static flag */ {})
     public tissueDefinitionComponent: TissueDefinitionComponent;
   }
 });

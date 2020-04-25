@@ -33,7 +33,7 @@ describe('optimizer-type component', () => {
         template: `<app-optimizer-type></app-optimizer-type>`,
       })
       class TestHostComponent {
-        @ViewChild(OptimizerTypeComponent)
+        @ViewChild(OptimizerTypeComponent, /* TODO: add static flag */ {})
         public optimizerTypeComponent: OptimizerTypeComponent;
       }
 });

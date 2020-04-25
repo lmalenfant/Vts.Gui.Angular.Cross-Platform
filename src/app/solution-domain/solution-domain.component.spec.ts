@@ -108,7 +108,7 @@ describe('solution-domain component', () => {
         template: `<app-solution-domain></app-solution-domain>`,
       })
       class TestHostComponent {
-        @ViewChild(SolutionDomainComponent)
+        @ViewChild(SolutionDomainComponent, /* TODO: add static flag */ {})
         public solutionDomainComponent: SolutionDomainComponent;
       }
 });

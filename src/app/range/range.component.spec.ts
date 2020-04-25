@@ -119,7 +119,7 @@ describe('range component', () => {
         template: `<app-range></app-range>`,
       })
       class TestHostComponent {
-        @ViewChild(RangeComponent)
+        @ViewChild(RangeComponent, /* TODO: add static flag */ {})
         public rangeComponent: RangeComponent;
       }
 });

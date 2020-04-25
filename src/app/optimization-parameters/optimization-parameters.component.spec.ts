@@ -33,7 +33,7 @@ describe('optimization-parameters component', () => {
         template: `<app-optimization-parameters></app-optimization-parameters>`,
       })
       class TestHostComponent {
-        @ViewChild(OptimizationParametersComponent)
+        @ViewChild(OptimizationParametersComponent, /* TODO: add static flag */ {})
         public optimizationParametersComponent: OptimizationParametersComponent;
       }
 });

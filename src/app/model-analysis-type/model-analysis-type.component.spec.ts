@@ -41,7 +41,7 @@ describe('model-analysis-type component', () => {
         template: `<app-model-analysis-type></app-model-analysis-type>`,
       })
       class TestHostComponent {
-        @ViewChild(ModelAnalysisTypeComponent)
+        @ViewChild(ModelAnalysisTypeComponent, /* TODO: add static flag */ {})
         public modelAnalysisTypeComponent: ModelAnalysisTypeComponent;
       }
 });
