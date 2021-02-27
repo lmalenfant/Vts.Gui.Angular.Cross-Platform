@@ -11,6 +11,7 @@ import { PlotService } from '../services/plot.service';
 import * as $ from 'jquery';
 import { PlotObject } from '../plot/plot-object.model';
 import { AxisRange } from '../axis/axis-range.model';
+import { plotData } from '../plot/plot-data.model';
 
 @Component({
     selector: 'app-spectral',
@@ -69,7 +70,7 @@ export class SpectralComponent {
     };
     console.log(spectralSettings);
     console.log(JSON.stringify(spectralSettings));
-    this.plotData.getPlotData(spectralSettings, "spectral").subscribe((data: any) => {
+    this.plotData.getPlotData(spectralSettings, "spectral").subscribe((data: plotData) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
       let plotObject = new PlotObject();
@@ -78,7 +79,7 @@ export class SpectralComponent {
       plotObject.Legend = "Spectral";
       plotObject.XAxis = "λ";
       plotObject.YAxis = "Reflectance";
-      plotObject.PlotList = data.PlotList;
+      plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
     });
   }

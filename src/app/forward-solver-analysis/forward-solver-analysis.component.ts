@@ -75,8 +75,15 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
     let independentAxis = new Axis();
-    independentAxis.axis = this.independentAxes.label;
+    if (this.independentAxes.label == 'ρ') {
+      independentAxis.axis = 'rho';
+    } else {
+      independentAxis.axis = this.independentAxes.label;
+    }
     independentAxis.axisValue = this.independentAxes.value;
+    if (!this.independentAxes.show) {
+      independentAxis = null;  
+    }
 
     var fsSettings = {
       forwardSolverType: this.forwardSolverEngine.value,

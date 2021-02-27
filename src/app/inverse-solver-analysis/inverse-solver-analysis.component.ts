@@ -12,6 +12,7 @@ import { OpticalProperties } from '../optical-properties/optical-properties.mode
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
 import { Axis } from '../axis/axis.model';
+import { plotData } from '../plot/plot-data.model';
 
 @Component({
   selector: 'app-inverse-solver-analysis',
@@ -98,8 +99,15 @@ export class InverseSolverAnalysisComponent implements OnInit {
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
     let independentAxis = new Axis();
-    independentAxis.axis = this.independentAxes.label;
+    if (this.independentAxes.label == 'ρ') {
+      independentAxis.axis = 'rho';
+    } else {
+      independentAxis.axis = this.independentAxes.label;
+    }
     independentAxis.axisValue = this.independentAxes.value;
+    if (!this.independentAxes.show) {
+      independentAxis = null;  
+    }
    
     var fsSettings = {
       forwardSolverType: this.forwardSolverEngine.value,
@@ -112,10 +120,16 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
-    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
-      //this.plotObject = data;
-      this.plotData.addNewPlot(data);
-      this.measuredData = data.PlotList[0].Data;
+    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: plotData) => {
+      let plotObject = new PlotObject();
+      plotObject.Detector = fsSettings.solutionDomain;
+      plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      plotObject.YAxis = "Reflectance";
+      plotObject.PlotList = data.plotList;
+      this.plotData.addNewPlot(plotObject);
+      this.measuredData = data.plotList[0].data;
     });
   }
     
@@ -124,8 +138,15 @@ export class InverseSolverAnalysisComponent implements OnInit {
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
     let independentAxis = new Axis();
-    independentAxis.axis = this.independentAxes.label;
+    if (this.independentAxes.label == 'ρ') {
+      independentAxis.axis = 'rho';
+    } else {
+      independentAxis.axis = this.independentAxes.label;
+    }
     independentAxis.axisValue = this.independentAxes.value;
+    if (!this.independentAxes.show) {
+      independentAxis = null;  
+    }
 
     var igSettings = {
       forwardSolverType: this.inverseSolverEngine.value,
@@ -139,9 +160,15 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(igSettings);
     console.log(JSON.stringify(igSettings));
-    this.plotData.getPlotData(igSettings, "forward").subscribe((data: any) => {
-      //this.plotObject = data;
-      this.plotData.addNewPlot(data);
+    this.plotData.getPlotData(igSettings, "forward").subscribe((data: plotData) => {
+      let plotObject = new PlotObject();
+      plotObject.Detector = igSettings.solutionDomain;
+      plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      plotObject.YAxis = "Reflectance";
+      plotObject.PlotList = data.plotList;
+      this.plotData.addNewPlot(plotObject);
     });
   }
 
@@ -150,8 +177,15 @@ export class InverseSolverAnalysisComponent implements OnInit {
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
     let independentAxis = new Axis();
-    independentAxis.axis = this.independentAxes.label;
+    if (this.independentAxes.label == 'ρ') {
+      independentAxis.axis = 'rho';
+    } else {
+      independentAxis.axis = this.independentAxes.label;
+    }
     independentAxis.axisValue = this.independentAxes.value;
+    if (!this.independentAxes.show) {
+      independentAxis = null;  
+    }
 
     var inSettings = {
       inverseSolverType: this.inverseSolverEngine.value,
@@ -165,7 +199,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(inSettings);
     console.log(JSON.stringify(inSettings));
-    this.plotData.getPlotData(inSettings, "inverse").subscribe((data: any) => {
+    this.plotData.getPlotData(inSettings, "inverse").subscribe((data: plotData) => {
       //this.plotObject = data;
       let plotObject = new PlotObject();
       plotObject.Detector = inSettings.solutionDomain;
@@ -173,7 +207,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
       plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
       plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
       plotObject.YAxis = "Reflectance";
-      plotObject.PlotList = data.PlotList;
+      plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
     });
   }
