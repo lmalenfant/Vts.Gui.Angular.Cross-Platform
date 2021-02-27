@@ -53,27 +53,31 @@ export class SolutionDomainComponent {
     switch (this.range.startLabelUnits) {
       case 'mm':
         this.range.title = 'Detector Positions';
-        this.range.start = 0.5;
-        this.range.stop = 9.5;
-        this.range.count = 19;
+        this.range.axis = "rho";
+        this.range.axisRange.start = 0.5;
+        this.range.axisRange.stop = 9.5;
+        this.range.axisRange.count = 19;
         break;
       case '1/mm':
         this.range.title = 'Spatial Frequencies';
-        this.range.start= 0;
-        this.range.stop = 0.5;
-        this.range.count = 51;
+        this.range.axis = "fx";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.5;
+        this.range.axisRange.count = 51;
         break;
       case 'ns':
         this.range.title = 'Detection Times';
-        this.range.start= 0;
-        this.range.stop = 0.05;
-        this.range.count = 51;
+        this.range.axis = "time";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.05;
+        this.range.axisRange.count = 51;
         break;
       case 'GHz':
         this.range.title = 'Temporal Frequencies';
-        this.range.start= 0;
-        this.range.stop = 0.5;
-        this.range.count = 51;
+        this.range.axis = "ft";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.5;
+        this.range.axisRange.count = 51;
         break;
       default:
         this.range.title = 'Detector Positions';

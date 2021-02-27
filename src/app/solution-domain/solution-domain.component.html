@@ -8,8 +8,8 @@
     </tr>
     <tr>
       <td>Time-Domain</td>
-      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfRhoAndTime" (click)="setIndependentAxes('ρ', 'mm', 't', 'ns')" />&nbsp;R(ρ, t)</td>
-      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfFxAndTime" (click)="setIndependentAxes('fx', '1/mm', 't', 'ns')" />&nbsp;R(fx, t)</td>
+      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfRhoAndTime" (click)="setIndependentAxes('ρ', 'mm', 'time', 'ns')" />&nbsp;R(ρ, t)</td>
+      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfFxAndTime" (click)="setIndependentAxes('fx', '1/mm', 'time', 'ns')" />&nbsp;R(fx, t)</td>
     </tr>
     <tr>
       <td>Frequency-Domain</td>

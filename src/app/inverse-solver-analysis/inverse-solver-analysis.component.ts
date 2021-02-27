@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule} from '@angular/forms'
 import { ForwardSolverEngine } from '../forward-solver-engine/forward-solver-engine.model';
 import { InverseSolverEngineList } from './inverse-solver-analysis-list';
 import { GaussianBeam } from '../forward-solver-engine/gaussian-beam.model';
@@ -12,6 +11,7 @@ import { OptimizerType } from '../optimizer-type/optimizer-type.model';
 import { OpticalProperties } from '../optical-properties/optical-properties.model';
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
+import { Axis } from '../axis/axis.model';
 
 @Component({
   selector: 'app-inverse-solver-analysis',
@@ -41,8 +41,8 @@ export class InverseSolverAnalysisComponent implements OnInit {
   independentAxes: IndependentAxis = {
     show: false,
     first: 'ρ',
-    second: 't',
-    label: 't',
+    second: 'time',
+    label: 'time',
     value: 0.05,
     units: 'ns',
     firstUnits: 'mm',
@@ -50,14 +50,17 @@ export class InverseSolverAnalysisComponent implements OnInit {
   };
   range: Range = {
     title: 'Detector Positions',
+    axis: 'rho',
+    axisRange: {
+      start: 0.5,
+      stop: 9.5,
+      count: 19
+      },
     startLabel: 'Begin',
     startLabelUnits: 'mm',
-    start: 0.5,
     endLabel: 'End',
     endLabelUnits: 'mm',
-    stop: 9.5,
     numberLabel: 'Number',
-    count: 19
   };
   optimizationParameters: OptimizationParameters = { value: 'MuaMusp' };
   optimizerType: OptimizerType = { value: 'MPFitLevenbergMarquardt' };
@@ -90,13 +93,19 @@ export class InverseSolverAnalysisComponent implements OnInit {
     this.plotData.newPlotObject.subscribe(plotObject => this.plotObject = plotObject);
   }
 
-
-  plotMeasured() {    
+  plotMeasured() {   
+    let xAxis = new Axis();
+    xAxis.axis = this.range.axis;
+    xAxis.axisRange = this.range.axisRange;
+    let independentAxis = new Axis();
+    independentAxis.axis = this.independentAxes.label;
+    independentAxis.axisValue = this.independentAxes.value;
+   
     var fsSettings = {
       forwardSolverType: this.forwardSolverEngine.value,
       solutionDomain: this.solutionDomain.value,
-      independentAxes: this.independentAxes,
-      xAxis: this.range,
+      independentAxes: independentAxis,
+      xAxis: xAxis,
       opticalProperties: this.forwardOpticalProperties,
       modelAnalysis: this.modelAnalysisType.value,
       noiseValue: this.noiseValue
@@ -110,13 +119,20 @@ export class InverseSolverAnalysisComponent implements OnInit {
     });
   }
     
-  plotInitialGuess() {    
+  plotInitialGuess() {
+    let xAxis = new Axis();
+    xAxis.axis = this.range.axis;
+    xAxis.axisRange = this.range.axisRange;
+    let independentAxis = new Axis();
+    independentAxis.axis = this.independentAxes.label;
+    independentAxis.axisValue = this.independentAxes.value;
+
     var igSettings = {
       forwardSolverType: this.inverseSolverEngine.value,
       forwardOpticalProperties: this.forwardOpticalProperties,
       solutionDomain: this.solutionDomain.value,
-      independentAxes: this.independentAxes,
-      xAxis: this.range,
+      independentAxes: independentAxis,
+      xAxis: xAxis,
       opticalProperties: this.initialGuessOpticalProperties,
       modelAnalysis: this.modelAnalysisType.value,
       noiseValue: "0"
@@ -130,14 +146,21 @@ export class InverseSolverAnalysisComponent implements OnInit {
   }
 
   runInverse() {    
+    let xAxis = new Axis();
+    xAxis.axis = this.range.axis;
+    xAxis.axisRange = this.range.axisRange;
+    let independentAxis = new Axis();
+    independentAxis.axis = this.independentAxes.label;
+    independentAxis.axisValue = this.independentAxes.value;
+
     var inSettings = {
       inverseSolverType: this.inverseSolverEngine.value,
       optimizerType: this.optimizerType.value,
       optimizationParameters: this.optimizationParameters.value,
       solutionDomain: this.solutionDomain.value,
       measuredData: this.measuredData,
-      independentAxes: this.independentAxes,
-      xAxis: this.range,
+      independentAxes: independentAxis,
+      xAxis: xAxis,
       opticalProperties: this.initialGuessOpticalProperties,
     };
     console.log(inSettings);
@@ -146,9 +169,9 @@ export class InverseSolverAnalysisComponent implements OnInit {
       //this.plotObject = data;
       let plotObject = new PlotObject();
       plotObject.Detector = inSettings.solutionDomain;
-      plotObject.Id = "R(" + inSettings.independentAxes.first + "," + inSettings.independentAxes.second + ")";
-      plotObject.Legend = "R(" + inSettings.independentAxes.first + "," + inSettings.independentAxes.second + ")";
-      plotObject.XAxis = inSettings.independentAxes.label == inSettings.independentAxes.first ? inSettings.independentAxes.second : inSettings.independentAxes.first;
+      plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+      plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
       plotObject.YAxis = "Reflectance";
       plotObject.PlotList = data.PlotList;
       this.plotData.addNewPlot(plotObject);

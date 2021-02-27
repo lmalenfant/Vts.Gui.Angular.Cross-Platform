@@ -21,14 +21,16 @@ export class PlotService {
   private singlePlotDataSource = new BehaviorSubject(new PlotObject);
   newPlotObject = this.singlePlotDataSource.asObservable();
 
-  baseUrl = "https://vtsapi.azurewebsites.net/api/v1/";
+  baseUrl = "https://localhost:5001/api/v1/";
 
   getPlotData(settings, endpoint) {
     const options = {
+      crossDomain: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'dataType': 'JSON',
         'X-API-KEY': '',
+        "Access-Control-Allow-Origin": "*"
       }),
     }
     let url = this.baseUrl + endpoint;

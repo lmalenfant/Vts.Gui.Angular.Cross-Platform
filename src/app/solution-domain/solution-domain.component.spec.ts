@@ -20,20 +20,23 @@ describe('solution-domain component', () => {
       testHostComponent.solutionDomainComponent.solutionDomain = { value: "ROfRho" };
       testHostComponent.solutionDomainComponent.range = {
         title: 'Detector Positions',
-        startLabel: 'Begin',
+        axis: "rho",
+        axisRange: {
+          start: 0.5,
+          stop: 9.5,
+          count: 19
+        },
+      startLabel: 'Begin',
         startLabelUnits: 'mm',
-        start: 0.5,
         endLabel: 'End',
         endLabelUnits: 'mm',
-        stop: 9.5,
         numberLabel: 'Number',
-        count: 19
       };
       testHostComponent.solutionDomainComponent.independentAxes = {
         show: false,
         first: 'ρ',
-        second: 't',
-        label: 't',
+        second: 'time',
+        label: 'time',
         value: 0.05,
         units: 'ns',
         firstUnits: 'mm',
@@ -90,13 +93,13 @@ describe('solution-domain component', () => {
         options[2].nativeElement.click();
         testHostFixture.detectChanges();
         options = testHostFixture.debugElement.queryAll(By.css('input[name="IndependentAxis"]'));   
-        expect(options[0].attributes["ng-reflect-value"]).toBe('t');
+        expect(options[0].attributes["ng-reflect-value"]).toBe('time');
         expect(options[1].attributes["ng-reflect-value"]).toBe('ρ');
         testHostFixture.whenStable().then(() => {
           let testElement = testHostFixture.debugElement.query(By.css('#independentAxisValue'));
           expect(testElement.nativeElement.value).toBe('0.05');
           testElement = testHostFixture.debugElement.query(By.css('#independentAxisLabel'));
-          expect(testElement.nativeElement.innerText).toEqual('t');
+          expect(testElement.nativeElement.innerText).toEqual('time');
           testElement = testHostFixture.debugElement.query(By.css('#independentAxisUnits'));
           expect(testElement.nativeElement.innerText).toEqual('ns');
         });
