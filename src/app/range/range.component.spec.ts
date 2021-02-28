@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RangeComponent } from './range.component';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -12,6 +12,9 @@ describe('range component', () => {
       TestBed.configureTestingModule({
         declarations: [RangeComponent, TestHostComponent],
         imports: [FormsModule]
+      })
+      .overrideComponent(TestHostComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default }
       })
       .compileComponents();
     }));
@@ -35,6 +38,10 @@ describe('range component', () => {
         };
         testHostFixture.detectChanges();
       }));
+
+    it('should create', async(() => {
+      expect(testHostComponent).toBeDefined();
+    }));
 
     it('should have a title of Detector Positions', async(() => {
       const testElement = testHostFixture.debugElement.query(By.css('.heading'));
@@ -122,7 +129,7 @@ describe('range component', () => {
         template: `<app-range></app-range>`,
       })
       class TestHostComponent {
-        @ViewChild(RangeComponent, /* TODO: add static flag */ {})
+        @ViewChild(RangeComponent, { static: true })
         public rangeComponent: RangeComponent;
       }
 });

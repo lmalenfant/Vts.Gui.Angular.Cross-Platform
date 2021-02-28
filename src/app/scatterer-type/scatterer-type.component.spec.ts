@@ -32,7 +32,7 @@ describe('scatterer-type component', () => {
     template: `<app-scatterer-type></app-scatterer-type>`,
   })
   class TestHostComponent {
-    @ViewChild(ScattererTypeComponent, /* TODO: add static flag */ {})
+    @ViewChild(ScattererTypeComponent, { static: true })
     public scattererTypeComponent: ScattererTypeComponent;
   }
 });

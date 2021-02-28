@@ -69,7 +69,7 @@ describe('forward-solver-engine component', () => {
         template: `<app-forward-solver-engine></app-forward-solver-engine>`,
       })
       class TestHostComponent {
-        @ViewChild(ForwardSolverEngineComponent, /* TODO: add static flag */ {})
+        @ViewChild(ForwardSolverEngineComponent, { static: true })
         public forwardSolverEngineComponent: ForwardSolverEngineComponent;
       }
 });

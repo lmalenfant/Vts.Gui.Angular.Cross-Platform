@@ -99,7 +99,7 @@ describe('optical-properties component', () => {
         template: `<app-optical-properties></app-optical-properties>`,
       })
       class TestHostComponent {
-        @ViewChild(OpticalPropertiesComponent, /* TODO: add static flag */ {})
+        @ViewChild(OpticalPropertiesComponent, { static: true })
         public opticalPropertiesComponent: OpticalPropertiesComponent;
       }
 });
