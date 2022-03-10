@@ -1,9 +1,9 @@
 <div id="plot-column" class="col">
   <ul id="plot-tabs" class="nav nav-tabs">
     <li *ngFor="let plotObject of plotObjects" id="tab-{{plotObject.Id}}" class="nav-item">
-      <a class="nav-link" role="tab" data-toggle="tab" href="#pane-{{plotObject.Id}}">
+      <button class="nav-link" role="tab" data-bs-toggle="tab" id="{{plotObject.Id}}" attr.data-bs-target="#pane-{{plotObject.Id}}">
         {{plotObject.Detector}}&nbsp;&nbsp;<i aria-hidden="true" class="fas fa-times" (click)="closeTab(plotObject)"></i>
-      </a>
+      </button>
     </li>
   </ul>
   <div><input type="checkbox" name="group-plots" id="group-plots" checked="checked" /><label for="group-plots">&nbsp;Group Plots</label></div>

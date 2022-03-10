@@ -45,7 +45,7 @@ export class PlotComponent implements OnInit {
   updatePlotData(solutionDomain: any) {
     this.updatePlotPanels();
     var selector = '#pane-' + solutionDomain;
-    $('#tab-' + solutionDomain + ' a').addClass('active');
+    $('#tab-' + solutionDomain + ' button').addClass('active');
     $(selector).addClass('active');
     $(selector).addClass('show');
     this.plotObjects.forEach(plotObject => {
@@ -56,7 +56,7 @@ export class PlotComponent implements OnInit {
   }
 
   updatePlotPanels() {
-    $('#plot-tabs li a').removeClass('active');
+    $('#plot-tabs li button').removeClass('active');
     $('#plot-column .tab-pane').removeClass('active');
     $('#plot-column .tab-pane').removeClass('show');
   }
