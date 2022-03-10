@@ -34,6 +34,6 @@ describe('optimization-parameters component', () => {
       })
       class TestHostComponent {
         @ViewChild(OptimizationParametersComponent, { static: true })
-        public optimizationParametersComponent: OptimizationParametersComponent;
+        public optimizationParametersComponent: OptimizationParametersComponent = new OptimizationParametersComponent;
       }
 });

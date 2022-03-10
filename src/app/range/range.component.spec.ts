@@ -130,6 +130,6 @@ describe('range component', () => {
       })
       class TestHostComponent {
         @ViewChild(RangeComponent, { static: true })
-        public rangeComponent: RangeComponent;
+        public rangeComponent: RangeComponent = new RangeComponent;
       }
 });

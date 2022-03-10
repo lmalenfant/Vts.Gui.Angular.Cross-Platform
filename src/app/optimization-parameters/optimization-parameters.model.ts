@@ -1,3 +1,3 @@
 export class OptimizationParameters {
-  value: string;
+  public value: string = "";
 }

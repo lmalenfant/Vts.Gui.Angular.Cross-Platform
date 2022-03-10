@@ -1,5 +1,5 @@
 export class AbsorberConcentration {
-  label: string;
-  value: number;
-  units: string;
+  public label: string = "";
+  public value: number = 0;
+  public units: string = "";
 }

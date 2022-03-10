@@ -1,4 +1,4 @@
 export class ForwardSolverEngine {
-  value: string;
-  display: string;
+  public value: string = "";
+  public display: string = "";
 }

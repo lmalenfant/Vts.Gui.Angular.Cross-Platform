@@ -112,6 +112,6 @@ describe('solution-domain component', () => {
       })
       class TestHostComponent {
         @ViewChild(SolutionDomainComponent, { static: true })
-        public solutionDomainComponent: SolutionDomainComponent;
+        public solutionDomainComponent: SolutionDomainComponent = new SolutionDomainComponent;
       }
 });

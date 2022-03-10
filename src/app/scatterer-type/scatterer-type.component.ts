@@ -12,17 +12,17 @@ import { MieScatterer as MieParticle } from './mie-particle.model';
 /** scatterer-type component*/
 export class ScattererTypeComponent {
   title: string = "Scatterer Type";
-  @Input() scattererType: ListType;
+  @Input() scattererType: ListType = new ListType;
   @Input('scattererTypeList') scattererTypeList = ScattererTypeList;
-  @Input() powerLaw: PowerLaw;
-  @Input() intralipid: Intralipid;
-  @Input() mieParticle: MieParticle;
+  @Input() powerLaw: PowerLaw = new PowerLaw;
+  @Input() intralipid: Intralipid = new Intralipid;
+  @Input() mieParticle: MieParticle = new MieParticle;
 
   constructor() {
 
   }
 
-  onChange(value) {
+  onChange(value: any) {
     console.log("Current Scatterer Type: " + this.scattererType.value);
     console.log("New Scatterer Type: " + value);
     this.scattererType.value = value;

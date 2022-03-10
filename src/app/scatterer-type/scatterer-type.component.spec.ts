@@ -33,6 +33,6 @@ describe('scatterer-type component', () => {
   })
   class TestHostComponent {
     @ViewChild(ScattererTypeComponent, { static: true })
-    public scattererTypeComponent: ScattererTypeComponent;
+    public scattererTypeComponent: ScattererTypeComponent = new ScattererTypeComponent;
   }
 });

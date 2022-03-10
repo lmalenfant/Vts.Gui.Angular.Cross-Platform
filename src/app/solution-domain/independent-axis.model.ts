@@ -1,10 +1,10 @@
 export class IndependentAxis {
-  first: string;
-  firstUnits: string;
-  second: string;
-  secondUnits: string;
-  label: string;
-  show: boolean;
-  units: string;
-  value: number;
+  public first: string = "";
+  public firstUnits: string = "";
+  public second: string = "";
+  public secondUnits: string = "";
+  public label: string = "";
+  public show: boolean = true;
+  public units: string = "";
+  public value: number = 0;
 }

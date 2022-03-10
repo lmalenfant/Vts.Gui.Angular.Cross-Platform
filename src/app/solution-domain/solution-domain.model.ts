@@ -1,3 +1,3 @@
 export class SolutionDomain {
-  value: string;
+  public value: string = "";
 }

@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class PlotService {
-  plotObjects: Array<PlotObject>;
-  groupPlots: boolean;
+  plotObjects: Array<PlotObject> = [];
+  groupPlots: boolean = true;
   constructor(private http: HttpClient) {
   }
 
@@ -23,13 +23,13 @@ export class PlotService {
 
   baseUrl = "https://localhost:5001/api/v1/";
 
-  getPlotData(settings, endpoint) {
+  getPlotData(settings: any, endpoint: string) {
     const options = {
       crossDomain: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'dataType': 'JSON',
-        'X-API-KEY': '',
+        'X-API-KEY': 'TESTKEY',
         "Access-Control-Allow-Origin": "*"
       }),
     }

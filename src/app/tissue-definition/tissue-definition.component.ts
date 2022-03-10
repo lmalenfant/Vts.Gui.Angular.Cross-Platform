@@ -8,7 +8,7 @@ import { ScattererTypeList } from '../scatterer-type/scatterer-list';
 import { PowerLawScatterer as PowerLaw } from '../scatterer-type/power-law.model';
 import { IntralipidScatterer as Intralipid } from '../scatterer-type/intralipid.model';
 import { MieScatterer as MieParticle } from '../scatterer-type/mie-particle.model';
-import * as $ from 'jquery';
+declare var $: any;
 
 @Component({
     selector: 'app-tissue-definition',
@@ -17,15 +17,15 @@ import * as $ from 'jquery';
 })
 /** tissue-definition component*/
 export class TissueDefinitionComponent {
-  @Input() tissueType: ListType;
+  @Input() tissueType: ListType = new ListType;
   @Input('tissueTypeList') tissueTypeList = TissueTypeList;
-  @Input() bloodConcentration: BloodConcentration;
-  @Input('absorberConcentration') absorberConcentration: Array<AbsorberConcentration>;
-  @Input() scattererType: ListType;
+  @Input() bloodConcentration: BloodConcentration = new BloodConcentration;
+  @Input('absorberConcentration') absorberConcentration: Array<AbsorberConcentration> = [];
+  @Input() scattererType: ListType = new ListType;
   @Input('scattererTypeList') scattererTypeList = ScattererTypeList;
-  @Input() powerLaw: PowerLaw;
-  @Input() intralipid: Intralipid;
-  @Input() mieParticle: MieParticle;
+  @Input() powerLaw: PowerLaw = new PowerLaw;
+  @Input() intralipid: Intralipid = new Intralipid;
+  @Input() mieParticle: MieParticle = new MieParticle;
 
   constructor() {
   }
@@ -51,7 +51,7 @@ export class TissueDefinitionComponent {
     this.bloodConcentration.bloodVolume = this.bloodConcentration.totalHb / 1E6 * 64500 / 150;
   }
 
-  onChange(value) {
+  onChange(value: any) {
     console.log("Display: " + this.tissueType.display + " Value: " + this.tissueType.value);
     console.log(value);
     this.tissueType.value = value;

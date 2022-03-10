@@ -8,10 +8,10 @@ import { PowerLawScatterer as PowerLaw } from '../scatterer-type/power-law.model
 import { IntralipidScatterer as Intralipid } from '../scatterer-type/intralipid.model';
 import { MieScatterer as MieParticle } from '../scatterer-type/mie-particle.model';
 import { PlotService } from '../services/plot.service';
-import * as $ from 'jquery';
 import { PlotObject } from '../plot/plot-object.model';
 import { AxisRange } from '../axis/axis-range.model';
 import { plotData } from '../plot/plot-data.model';
+declare var $: any;
 
 @Component({
     selector: 'app-spectral',
@@ -53,7 +53,7 @@ export class SpectralComponent {
     this.plotSpectralData("musp", "μs'");
   }
 
-  plotSpectralData(plotType, plotName){
+  plotSpectralData(plotType: string, plotName: string){
     // need to update the absorber values because the input to not recognize the change
     this.updateAbsorberValues(this.tissueTypeDropdown.value);
     let spectralSettings = {
@@ -70,7 +70,7 @@ export class SpectralComponent {
     };
     console.log(spectralSettings);
     console.log(JSON.stringify(spectralSettings));
-    this.plotData.getPlotData(spectralSettings, "spectral").subscribe((data: plotData) => {
+    this.plotData.getPlotData(spectralSettings, "spectral").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
       let plotObject = new PlotObject();
@@ -84,7 +84,7 @@ export class SpectralComponent {
     });
   }
 
-  updateAbsorberValues(value) {
+  updateAbsorberValues(value: string) {
     switch (value) {
       case 'Skin':
         this.absorberConcentration = Skin;

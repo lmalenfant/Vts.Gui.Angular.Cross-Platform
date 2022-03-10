@@ -1,5 +1,5 @@
 export class plotList {
-    label: string;
-    data: Array<Array<number>>;
-  }
+  public label: string = "";
+  public data: Array<Array<number>> = [];
+}
   

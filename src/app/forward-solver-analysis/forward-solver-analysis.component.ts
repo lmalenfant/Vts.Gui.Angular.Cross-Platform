@@ -8,9 +8,9 @@ import { OpticalProperties } from '../optical-properties/optical-properties.mode
 import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.model';
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
-import * as $ from 'jquery';
 import { Axis } from '../axis/axis.model';
 import { plotData } from '../plot/plot-data.model';
+declare var $: any;
 
 @Component({
   selector: 'app-forward-solver-analysis',
@@ -59,7 +59,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
   modelAnalysisType: ModelAnalysisType = { value: 'R' };
   noiseValue = '0'; // always set to 0 for fs
 
-  plotObject: PlotObject;
+  plotObject: PlotObject | undefined;
   //plotObjects: Array<PlotObject>;
 
   constructor(private plotData: PlotService) {
@@ -74,7 +74,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     let xAxis = new Axis();
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
-    let independentAxis = new Axis();
+    var independentAxis: Axis | null = new Axis();
     if (this.independentAxes.label == 'ρ') {
       independentAxis.axis = 'rho';
     } else {
@@ -96,7 +96,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
-    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: plotData) => {
+    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
       let plotObject = new PlotObject();

@@ -9,12 +9,12 @@ import { SolutionDomain } from './solution-domain.model';
 })
 /** solution-domain component*/
 export class SolutionDomainComponent {
-  @Input() solutionDomain: SolutionDomain;
-  @Input() independentAxes: IndependentAxis;
-  @Input() range: Range;
-  @Input() id: string;
+  @Input() solutionDomain: SolutionDomain = new SolutionDomain;
+  @Input() independentAxes: IndependentAxis = new IndependentAxis;
+  @Input() range: Range = new Range;
+  @Input() id: string = "";
 
-  setIndependentAxes(first, units1, second, units2) {
+  setIndependentAxes(first: string, units1: string, second: string, units2: string) {
     console.log('setIndependentAxis');
     if (first && second && units1 && units2) {
       this.independentAxes.label = second;
@@ -36,7 +36,7 @@ export class SolutionDomainComponent {
     }
   }
 
-  changeUnits(val) {
+  changeUnits(val: number) {
     console.log('changeUnits');
     if (val === 1) {
       this.independentAxes.units = this.independentAxes.firstUnits;

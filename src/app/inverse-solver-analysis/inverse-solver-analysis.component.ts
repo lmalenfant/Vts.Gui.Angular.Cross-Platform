@@ -82,9 +82,9 @@ export class InverseSolverAnalysisComponent implements OnInit {
   modelAnalysisType: ModelAnalysisType = { value: 'R'};
   noiseValue = '0';
   
-  measuredData: number[][];
+  measuredData: number[][] = [];
 
-  plotObject: PlotObject; 
+  plotObject: PlotObject = new PlotObject; 
   //plotObjects: Array<PlotObject>;
 
   constructor(private plotData: PlotService) {
@@ -98,7 +98,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     let xAxis = new Axis();
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
-    let independentAxis = new Axis();
+    let independentAxis: Axis | null = new Axis();
     if (this.independentAxes.label == 'ρ') {
       independentAxis.axis = 'rho';
     } else {
@@ -120,7 +120,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(fsSettings);
     console.log(JSON.stringify(fsSettings));
-    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: plotData) => {
+    this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       let plotObject = new PlotObject();
       plotObject.Detector = fsSettings.solutionDomain;
       plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
@@ -137,7 +137,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     let xAxis = new Axis();
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
-    let independentAxis = new Axis();
+    let independentAxis: Axis | null = new Axis();
     if (this.independentAxes.label == 'ρ') {
       independentAxis.axis = 'rho';
     } else {
@@ -160,7 +160,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(igSettings);
     console.log(JSON.stringify(igSettings));
-    this.plotData.getPlotData(igSettings, "forward").subscribe((data: plotData) => {
+    this.plotData.getPlotData(igSettings, "forward").subscribe((data: any) => {
       let plotObject = new PlotObject();
       plotObject.Detector = igSettings.solutionDomain;
       plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
@@ -176,7 +176,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     let xAxis = new Axis();
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
-    let independentAxis = new Axis();
+    let independentAxis: Axis | null = new Axis();
     if (this.independentAxes.label == 'ρ') {
       independentAxis.axis = 'rho';
     } else {
@@ -199,7 +199,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     };
     console.log(inSettings);
     console.log(JSON.stringify(inSettings));
-    this.plotData.getPlotData(inSettings, "inverse").subscribe((data: plotData) => {
+    this.plotData.getPlotData(inSettings, "inverse").subscribe((data: any) => {
       //this.plotObject = data;
       let plotObject = new PlotObject();
       plotObject.Detector = inSettings.solutionDomain;

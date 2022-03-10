@@ -7,7 +7,7 @@ import { OpticalProperties } from './optical-properties.model'
 })
 /** optical-properties component*/
 export class OpticalPropertiesComponent {
-  @Input() opticalProperties: OpticalProperties;
+  @Input() opticalProperties: OpticalProperties = new OpticalProperties;
 
   constructor() {
 

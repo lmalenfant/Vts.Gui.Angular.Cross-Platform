@@ -1,6 +1,6 @@
 export class AxisRange {
-    start: number;
-    stop: number;
-    count: number;
+    public start: number = 0.5;
+    public stop: number = 9.5;
+    public count: number = 10;
   }
   

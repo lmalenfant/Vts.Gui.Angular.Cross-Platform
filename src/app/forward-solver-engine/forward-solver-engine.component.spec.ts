@@ -3,6 +3,7 @@ import { By } from "@angular/platform-browser";
 import { ForwardSolverEngineComponent } from './forward-solver-engine.component';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ForwardSolverEngineList } from './forward-solver-engine-list';
 
 describe('forward-solver-engine component', () => {
     let testHostComponent: TestHostComponent;
@@ -70,6 +71,6 @@ describe('forward-solver-engine component', () => {
       })
       class TestHostComponent {
         @ViewChild(ForwardSolverEngineComponent, { static: true })
-        public forwardSolverEngineComponent: ForwardSolverEngineComponent;
-      }
+        public forwardSolverEngineComponent: ForwardSolverEngineComponent = new ForwardSolverEngineComponent
+    }
 });

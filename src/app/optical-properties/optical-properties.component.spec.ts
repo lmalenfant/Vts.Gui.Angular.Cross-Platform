@@ -100,6 +100,6 @@ describe('optical-properties component', () => {
       })
       class TestHostComponent {
         @ViewChild(OpticalPropertiesComponent, { static: true })
-        public opticalPropertiesComponent: OpticalPropertiesComponent;
+        public opticalPropertiesComponent: OpticalPropertiesComponent = new OpticalPropertiesComponent;
       }
 });

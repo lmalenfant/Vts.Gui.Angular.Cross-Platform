@@ -34,6 +34,6 @@ describe('optimizer-type component', () => {
       })
       class TestHostComponent {
         @ViewChild(OptimizerTypeComponent, { static: true })
-        public optimizerTypeComponent: OptimizerTypeComponent;
+        public optimizerTypeComponent: OptimizerTypeComponent = new OptimizerTypeComponent;
       }
 });

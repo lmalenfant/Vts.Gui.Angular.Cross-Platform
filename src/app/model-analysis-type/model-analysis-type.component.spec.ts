@@ -42,6 +42,6 @@ describe('model-analysis-type component', () => {
       })
       class TestHostComponent {
         @ViewChild(ModelAnalysisTypeComponent, { static: true })
-        public modelAnalysisTypeComponent: ModelAnalysisTypeComponent;
+        public modelAnalysisTypeComponent: ModelAnalysisTypeComponent = new ModelAnalysisTypeComponent;
       }
 });

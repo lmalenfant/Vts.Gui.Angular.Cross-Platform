@@ -59,6 +59,6 @@ describe('tissue-definition component', () => {
   })
   class TestHostComponent {
     @ViewChild(TissueDefinitionComponent, { static: true })
-    public tissueDefinitionComponent: TissueDefinitionComponent;
+    public tissueDefinitionComponent: TissueDefinitionComponent = new TissueDefinitionComponent;
   }
 });

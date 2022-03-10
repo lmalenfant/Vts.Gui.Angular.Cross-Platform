@@ -1,7 +1,7 @@
 export class MieScatterer {
-  particleRadius: number;
-  particleRefractiveIndex: number;
-  mediumRefractiveIndex: number;
-  volumeFraction: number;
-  show: boolean;
+  public particleRadius: number = 0;
+  public particleRefractiveIndex: number = 0;
+  public mediumRefractiveIndex: number = 0;
+  public volumeFraction: number = 0;
+  public show: boolean = true;
 }

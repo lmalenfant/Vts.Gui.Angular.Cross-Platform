@@ -7,7 +7,7 @@ import { OptimizerType } from './optimizer-type.model';
 })
 /** optimizer-type component*/
 export class OptimizerTypeComponent {
-  @Input() optimizerType: OptimizerType;
+  @Input() optimizerType: OptimizerType = new OptimizerType;
 
   constructor() {
     
