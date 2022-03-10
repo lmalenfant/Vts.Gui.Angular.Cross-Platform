@@ -135,14 +135,14 @@ export class PlotComponent implements OnInit {
     }
 
     placeholder.bind("plothover", function (pos: any, item: any) {
-      var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+      var str = "(" + item.x.toFixed(2) + ", " + item.y.toFixed(2) + ")";
       $("#hoverdata").text(str);
 
       if (item) {
-        var x = item.datapoint[0].toFixed(4),
-          y = item.datapoint[1].toFixed(4);
+        var x = item.x.toFixed(4),
+          y = item.y.toFixed(4);
 
-        $("#tooltip").html(plotObject.Legend + " = " + item.series.label + " (" + x + ", " + y + ")")
+        $("#tooltip").html(plotObject.Legend + " = " + "item.series.label" + " (" + x + ", " + y + ")")
           .css({ top: item.pageY + 5, left: item.pageX + 5 })
           .fadeIn(200);
       } else {
