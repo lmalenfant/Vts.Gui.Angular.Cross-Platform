@@ -1,6 +1,6 @@
 <div class="heading">{{range.title}}</div>
 <div class="range form-inline">
-  <div class="row input-group input-group-sm">
+  <div class="row g-3 input-group input-group-sm">
     <div class="col input-group input-group-sm">
       <span id="startLabel" class="input-group-text">{{range.startLabel}}</span>
       <input id="startValue" name="startValue" type="text" class="form-control" [(ngModel)]="range.axisRange.start" />
@@ -15,5 +15,6 @@
       <span id="numberLabel" class="input-group-text">{{range.numberLabel}}</span>
       <input id="numberValue" name="numberValue" type="text" class="form-control number" [(ngModel)]="range.axisRange.count" />
     </div>
+    <div class="col"></div>
   </div>
 </div>
