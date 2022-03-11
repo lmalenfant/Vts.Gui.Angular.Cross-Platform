@@ -1,33 +1,21 @@
 <div class="heading">{{opticalProperties.title}}</div>
-<div class="optical-properties form-inline">
-  <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-    <div class="input-group-prepend">
-      <span class="input-group-text">μa</span>
-    </div>
+<div class="row g-4 input-group input-group-sm optical-properties">
+  <div class="col input-group input-group-sm">
+    <span class="input-group-text">μa</span>
     <input id="mua" type="text" class="form-control" placeholder="μa" [(ngModel)]="opticalProperties.mua" />
-    <div class="input-group-append">
-      <span class="input-group-text">1/mm</span>
-    </div>
+    <span class="input-group-text">1/mm</span>
   </div>
-  <div class="input-group input-group-sm mr-sm-2">
-    <div class="input-group-prepend">
-      <span class="input-group-text">μs'</span>
-    </div>
+  <div class="col input-group input-group-sm">
+    <span class="input-group-text">μs'</span>
     <input id="musp" type="text" class="form-control" placeholder="μs'" [(ngModel)]="opticalProperties.musp" />
-    <div class="input-group-append">
-      <span class="input-group-text">1/mm</span>
-    </div>
+    <span class="input-group-text">1/mm</span>
   </div>
-  <div class="input-group input-group-sm mr-sm-2">
-    <div class="input-group-prepend">
-      <span class="input-group-text">g</span>
-    </div>
+  <div class="col input-group input-group-sm">
+    <span class="input-group-text">g</span>
     <input id="g" type="text" class="form-control" placeholder="g" [(ngModel)]="opticalProperties.g" />
   </div>
-  <div class="input-group input-group-sm">
-    <div class="input-group-prepend">
-      <span class="input-group-text">n</span>
-    </div>
+  <div class="col input-group input-group-sm">
+    <span class="input-group-text">n</span>
     <input id="n" type="text" class="form-control" placeholder="n" [(ngModel)]="opticalProperties.n" />
   </div>
 </div>

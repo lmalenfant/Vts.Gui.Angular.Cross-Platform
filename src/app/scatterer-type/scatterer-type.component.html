@@ -1,58 +1,53 @@
 <div>
   <div class="heading">{{title}}</div>
-  <select id="scatterer-type" class="form-control form-control-sm" [ngModel]="scattererType.value" (ngModelChange)="onChange($event)">
+  <select id="scatterer-type" class="form-select form-select-sm" [ngModel]="scattererType.value"
+    (ngModelChange)="onChange($event)">
     <option *ngFor="let scatterer of scattererTypeList" [value]="scatterer.value">{{scatterer.display}}</option>
   </select>
   <br />
   <div>
     <div class="range form-inline" *ngIf="powerLaw.show">
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+      <div class="row input-group input-group-sm">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">A</span>
+          <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="powerLaw.a" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="powerLaw.a" />
-        <div class="input-group-append">
+        <div class="col input-group input-group-sm">
           <span id="b" class="input-group-text">b</span>
-        </div>
-        <input id="startValue" name="startValue" type="text" class="form-control" [(ngModel)]="powerLaw.b" />
-        <div class="input-group-append">
+          <input id="startValue" name="startValue" type="text" class="form-control" [(ngModel)]="powerLaw.b" />
           <span id="desc" class="input-group-text">(A = μs' at 1000nm)</span>
         </div>
       </div>
     </div>
     <div class="range form-inline" *ngIf="intralipid.show">
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+      <div class="row input-group input-group-sm">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">Volume Fraction</span>
+          <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="intralipid.volumeFraction" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="intralipid.volumeFraction" />
+        <div class="col"></div>
       </div>
     </div>
     <div class="range form-inline" *ngIf="mieParticle.show">
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+      <div class="row input-group input-group-sm">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">Particle Radius</span>
+          <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.particleRadius" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.particleRadius" />
-      </div>
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">Particle</span>
+          <input id="a" name="startValue" type="text" class="form-control"
+            [(ngModel)]="mieParticle.particleRefractiveIndex" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.particleRefractiveIndex" />
-      </div>
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">Medium</span>
+          <input id="a" name="startValue" type="text" class="form-control"
+            [(ngModel)]="mieParticle.mediumRefractiveIndex" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.mediumRefractiveIndex" />
-      </div>
-      <div class="input-group input-group-sm mr-sm-2 ml-sm-2">
-        <div class="input-group-prepend">
+        <div class="col input-group input-group-sm">
           <span id="startLabel" class="input-group-text">Volume Fraction</span>
+          <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.volumeFraction" />
         </div>
-        <input id="a" name="startValue" type="text" class="form-control" [(ngModel)]="mieParticle.volumeFraction" />
       </div>
     </div>
   </div>
-</div>
