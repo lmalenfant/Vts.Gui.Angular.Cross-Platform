@@ -42,7 +42,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
       start: 0.5,
       stop: 9.5,
       count: 19
-      },
+    },
     startLabel: 'Begin',
     startLabelUnits: 'mm',
     endLabel: 'End',
@@ -82,7 +82,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     }
     independentAxis.axisValue = this.independentAxes.value;
     if (!this.independentAxes.show) {
-      independentAxis = null;  
+      independentAxis = null;
     }
 
     var fsSettings = {
@@ -100,10 +100,20 @@ export class ForwardSolverAnalysisComponent implements OnInit {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
       let plotObject = new PlotObject();
-      plotObject.Detector = fsSettings.solutionDomain;
-      plotObject.Id = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-      plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-      plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      plotObject.Id = fsSettings.solutionDomain;
+      if (independentAxis === null) {
+        var axis = this.range.axis;
+        if (axis == 'rho') {
+          axis = 'ρ';
+        }
+        plotObject.Detector = "R(" + axis + ")";
+        plotObject.Legend = "R(" + axis + ")";
+        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      } else {
+        plotObject.Detector = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+        plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
+        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      }
       plotObject.YAxis = "Reflectance";
       plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);

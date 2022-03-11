@@ -4,7 +4,7 @@ export class IndependentAxis {
   public second: string = "";
   public secondUnits: string = "";
   public label: string = "";
-  public show: boolean = true;
+  public show: boolean = false;
   public units: string = "";
   public value: number = 0;
 }
