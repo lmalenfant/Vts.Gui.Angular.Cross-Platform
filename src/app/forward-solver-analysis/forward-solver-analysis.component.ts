@@ -9,7 +9,6 @@ import { ModelAnalysisType } from '../model-analysis-type/model-analysis-type.mo
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
 import { Axis } from '../axis/axis.model';
-import { plotData } from '../plot/plot-data.model';
 declare var $: any;
 
 @Component({

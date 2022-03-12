@@ -12,7 +12,6 @@ import { OpticalProperties } from '../optical-properties/optical-properties.mode
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
 import { Axis } from '../axis/axis.model';
-import { plotData } from '../plot/plot-data.model';
 
 @Component({
   selector: 'app-inverse-solver-analysis',

@@ -9,8 +9,6 @@ import { IntralipidScatterer as Intralipid } from '../scatterer-type/intralipid.
 import { MieScatterer as MieParticle } from '../scatterer-type/mie-particle.model';
 import { PlotService } from '../services/plot.service';
 import { PlotObject } from '../plot/plot-object.model';
-import { AxisRange } from '../axis/axis-range.model';
-import { plotData } from '../plot/plot-data.model';
 declare var $: any;
 
 @Component({
