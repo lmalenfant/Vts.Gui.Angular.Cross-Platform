@@ -10,6 +10,6 @@ export class ModelAnalysisTypeComponent {
   @Input() modelAnalysisType: ModelAnalysisType = new ModelAnalysisType;
 
   constructor() {
-
-    }
+    console.log("Constructor - ModelAnalysisTypeComponent");
+  }
 }

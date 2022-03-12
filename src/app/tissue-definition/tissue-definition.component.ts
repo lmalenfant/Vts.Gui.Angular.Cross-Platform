@@ -28,6 +28,7 @@ export class TissueDefinitionComponent {
   @Input() mieParticle: MieParticle = new MieParticle;
 
   constructor() {
+    console.log("Constructor - TissueDefinitionComponent");  
   }
 
   ngOnInit() {

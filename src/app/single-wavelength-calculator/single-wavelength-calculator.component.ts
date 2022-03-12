@@ -8,6 +8,6 @@
 export class SingleWavelengthCalculatorComponent {
     /** single-wavelength-calculator ctor */
     constructor() {
-
+        console.log("Constructor - SingleWavelengthCalculatorComponent");
     }
 }

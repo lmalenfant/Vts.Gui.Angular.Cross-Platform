@@ -85,6 +85,6 @@ export class SolutionDomainComponent {
   }
 
   constructor() {
-
+    console.log("Constructor - SolutionDomainComponent");
   }
 }

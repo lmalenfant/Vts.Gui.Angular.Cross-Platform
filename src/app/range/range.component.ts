@@ -10,5 +10,6 @@ export class RangeComponent implements OnInit {
   @Input() range: Range = new Range;
 
   ngOnInit() {
+    console.log("Initialization - RangeComponent");
   }
 }

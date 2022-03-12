@@ -40,7 +40,7 @@ export class SpectralComponent {
   };
 
   constructor(private plotData: PlotService) {
-
+    console.log("Constructor - SpectralComponent");
   }
 
   plotMuspSpectrum() {

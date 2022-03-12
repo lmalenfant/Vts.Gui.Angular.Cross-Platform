@@ -6,7 +6,7 @@ function plotAccordingToChoices(plotObject) {
     var item = jQuery.extend(true, {}, val);
     datasets.push({ data: item.data, label: item.label, color: item.color });
   });
-  //var datasets = jQuery.extend(true, {}, plotObject.PlotList); //clone the dataset so we retain original values
+  //var datasets = jQuery.extend(true, {}, plotObject.PlotList) //clone the dataset so we retain original values
   var data = [];
 
   var placeholder = $("#placeholder-" + id);

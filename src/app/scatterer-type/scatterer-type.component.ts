@@ -19,7 +19,7 @@ export class ScattererTypeComponent {
   @Input() mieParticle: MieParticle = new MieParticle;
 
   constructor() {
-
+    console.log("Constructor - ScattererTypeComponent");
   }
 
   onChange(value: any) {

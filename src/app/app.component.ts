@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Vts Application';
 
-  constructor() { }
+  constructor() {
+    console.log("Constructor - AppComponent");  
+   }
 }
