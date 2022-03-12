@@ -1,9 +1,9 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PlotService } from './plot.service';
 
 describe('plot service', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -27,7 +27,8 @@ describe('plot service', () => {
           expect(data.XAxis).toBe("ρ");
           expect(data.YAxis).toBe("Reflectance");
         });
-        let baseApiUrl = "https://vtsapi.azurewebsites.net/api/v1/";
+        //let baseApiUrl = "https://vtsapi.azurewebsites.net/api/v1/";
+        let baseApiUrl = "https://localhost:5001/api/v1/";
 
         // set the expectations for the HttpClient mock
         const req = httpMock.expectOne(baseApiUrl + 'forward');

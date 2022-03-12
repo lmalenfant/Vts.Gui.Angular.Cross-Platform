@@ -7,7 +7,7 @@ import { OptimizationParameters } from './optimization-parameters.model';
 })
 /** optimization-parameters component*/
 export class OptimizationParametersComponent {
-  @Input() optimizationParameters: OptimizationParameters;
+  @Input() optimizationParameters: OptimizationParameters = new OptimizationParameters;
 
   constructor() {
     

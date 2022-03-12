@@ -1,5 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { By } from "@angular/platform-browser";
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { OptimizerTypeComponent } from './optimizer-type.component';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -8,7 +7,7 @@ describe('optimizer-type component', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [OptimizerTypeComponent, TestHostComponent],
         imports: [FormsModule],
@@ -17,12 +16,12 @@ describe('optimizer-type component', () => {
       .compileComponents();
     }));
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
     }));
 
-    it('should have a title of Optimizer Type', async(() => {
+    it('should have a title of Optimizer Type', waitForAsync(() => {
       testHostComponent.optimizerTypeComponent.optimizerType = { value: "levenbergmarquardt" };
       testHostFixture.detectChanges();
       expect(testHostComponent.optimizerTypeComponent.optimizerType.value).toBe('levenbergmarquardt');
@@ -33,7 +32,7 @@ describe('optimizer-type component', () => {
         template: `<app-optimizer-type></app-optimizer-type>`,
       })
       class TestHostComponent {
-        @ViewChild(OptimizerTypeComponent, /* TODO: add static flag */ {})
-        public optimizerTypeComponent: OptimizerTypeComponent;
+        @ViewChild(OptimizerTypeComponent, { static: true })
+        public optimizerTypeComponent: OptimizerTypeComponent = new OptimizerTypeComponent;
       }
 });

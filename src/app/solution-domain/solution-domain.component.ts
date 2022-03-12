@@ -9,12 +9,12 @@ import { SolutionDomain } from './solution-domain.model';
 })
 /** solution-domain component*/
 export class SolutionDomainComponent {
-  @Input() solutionDomain: SolutionDomain;
-  @Input() independentAxes: IndependentAxis;
-  @Input() range: Range;
-  @Input() id: string;
+  @Input() solutionDomain: SolutionDomain = new SolutionDomain;
+  @Input() independentAxes: IndependentAxis = new IndependentAxis;
+  @Input() range: Range = new Range;
+  @Input() id: string = "";
 
-  setIndependentAxes(first, units1, second, units2) {
+  setIndependentAxes(first: string, units1: string, second: string, units2: string) {
     console.log('setIndependentAxis');
     if (first && second && units1 && units2) {
       this.independentAxes.label = second;
@@ -36,7 +36,7 @@ export class SolutionDomainComponent {
     }
   }
 
-  changeUnits(val) {
+  changeUnits(val: number) {
     console.log('changeUnits');
     if (val === 1) {
       this.independentAxes.units = this.independentAxes.firstUnits;
@@ -53,27 +53,31 @@ export class SolutionDomainComponent {
     switch (this.range.startLabelUnits) {
       case 'mm':
         this.range.title = 'Detector Positions';
-        this.range.start = 0.5;
-        this.range.stop = 9.5;
-        this.range.count = 19;
+        this.range.axis = "rho";
+        this.range.axisRange.start = 0.5;
+        this.range.axisRange.stop = 9.5;
+        this.range.axisRange.count = 19;
         break;
       case '1/mm':
         this.range.title = 'Spatial Frequencies';
-        this.range.start= 0;
-        this.range.stop = 0.5;
-        this.range.count = 51;
+        this.range.axis = "fx";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.5;
+        this.range.axisRange.count = 51;
         break;
       case 'ns':
         this.range.title = 'Detection Times';
-        this.range.start= 0;
-        this.range.stop = 0.05;
-        this.range.count = 51;
+        this.range.axis = "time";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.05;
+        this.range.axisRange.count = 51;
         break;
       case 'GHz':
         this.range.title = 'Temporal Frequencies';
-        this.range.start= 0;
-        this.range.stop = 0.5;
-        this.range.count = 51;
+        this.range.axis = "ft";
+        this.range.axisRange.start= 0;
+        this.range.axisRange.stop = 0.5;
+        this.range.axisRange.count = 51;
         break;
       default:
         this.range.title = 'Detector Positions';

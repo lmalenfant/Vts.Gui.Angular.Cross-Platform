@@ -8,8 +8,8 @@ import { PowerLawScatterer as PowerLaw } from '../scatterer-type/power-law.model
 import { IntralipidScatterer as Intralipid } from '../scatterer-type/intralipid.model';
 import { MieScatterer as MieParticle } from '../scatterer-type/mie-particle.model';
 import { PlotService } from '../services/plot.service';
-import * as $ from 'jquery';
 import { PlotObject } from '../plot/plot-object.model';
+declare var $: any;
 
 @Component({
     selector: 'app-spectral',
@@ -26,14 +26,17 @@ export class SpectralComponent {
   mieParticle: MieParticle = { particleRadius: 0.5, particleRefractiveIndex: 1.4, mediumRefractiveIndex: 1, volumeFraction: 0.01, show: false };
   range: Range = {
     title: 'Wavelength Range',
+    axis: 'wavelength',
+    axisRange: {
+      start: 650,
+      stop: 1000,
+      count: 36
+      },
     startLabel: 'Begin',
     startLabelUnits: 'nm',
-    start: 650,
     endLabel: 'End',
     endLabelUnits: 'nm',
-    stop: 1000,
     numberLabel: 'Number',
-    count: 36
   };
 
   constructor(private plotData: PlotService) {
@@ -48,7 +51,7 @@ export class SpectralComponent {
     this.plotSpectralData("musp", "μs'");
   }
 
-  plotSpectralData(plotType, plotName){
+  plotSpectralData(plotType: string, plotName: string){
     // need to update the absorber values because the input to not recognize the change
     this.updateAbsorberValues(this.tissueTypeDropdown.value);
     let spectralSettings = {
@@ -74,12 +77,12 @@ export class SpectralComponent {
       plotObject.Legend = "Spectral";
       plotObject.XAxis = "λ";
       plotObject.YAxis = "Reflectance";
-      plotObject.PlotList = data.PlotList;
+      plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
     });
   }
 
-  updateAbsorberValues(value) {
+  updateAbsorberValues(value: string) {
     switch (value) {
       case 'Skin':
         this.absorberConcentration = Skin;

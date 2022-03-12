@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { PlotObject } from './plot-object.model';
 import { PlotService } from '../services/plot.service';
-import * as $ from 'jquery';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+declare var $: any;
 declare const plotAccordingToChoices: any;
 
 @Component({
@@ -11,16 +12,17 @@ declare const plotAccordingToChoices: any;
 /** plot component*/
 export class PlotComponent implements OnInit {
   colorArray: Array<number> = [];
-  plot;
-  plotObject: PlotObject;
+  plot: any;
+  plotObject: PlotObject = new PlotObject;
   plotObjects: Array<PlotObject> = [this.plotObject];
   lastActionId = "";
+  faTimes = faTimes;
 
   constructor(private plotData: PlotService) {
 
   }
 
-  @ViewChildren('plotChoices') choices: QueryList<any>;
+  @ViewChildren('plotChoices') choices: QueryList<any> = new QueryList;
 
   ngAfterViewInit() {
     this.choices.changes.subscribe(c => {
@@ -42,10 +44,10 @@ export class PlotComponent implements OnInit {
     this.plotData.groupPlots = $("#group-plots").is(":checked");
   }
 
-  updatePlotData(solutionDomain) {
+  updatePlotData(solutionDomain: any) {
     this.updatePlotPanels();
     var selector = '#pane-' + solutionDomain;
-    $('#tab-' + solutionDomain + ' a').addClass('active');
+    $('#tab-' + solutionDomain + ' button').addClass('active');
     $(selector).addClass('active');
     $(selector).addClass('show');
     this.plotObjects.forEach(plotObject => {
@@ -56,7 +58,7 @@ export class PlotComponent implements OnInit {
   }
 
   updatePlotPanels() {
-    $('#plot-tabs li a').removeClass('active');
+    $('#plot-tabs li button').removeClass('active');
     $('#plot-column .tab-pane').removeClass('active');
     $('#plot-column .tab-pane').removeClass('show');
   }
@@ -73,7 +75,7 @@ export class PlotComponent implements OnInit {
     }
   }
 
-  deletePlot(plot: PlotObject, key) {
+  deletePlot(plot: PlotObject, key: number) {
     var self = this;
     if (this.plotObjects) {
       this.plotObjects.forEach(function (plotObject: PlotObject) {
@@ -88,12 +90,12 @@ export class PlotComponent implements OnInit {
     }
   }
 
-  generatePlot(plotObject) {
+  generatePlot(plotObject: any) {
     var self = this;
     var id = plotObject.Id;
     var datasets = plotObject.PlotList;
     var i = 0;
-    datasets.forEach(function (val, key) {
+    datasets.forEach(function (val: any, key: number) {
       if (typeof (self.colorArray[key]) !== 'undefined') {
         val.color = self.colorArray[key]; //if a value exists pull it from the color array
       } else {
@@ -110,11 +112,11 @@ export class PlotComponent implements OnInit {
     var placeholder = $("#placeholder-" + id);
     placeholder.html("");
 
-    $("#choices-" + id + " input").bind('click', function () {
+    $("#choices-" + id + " input").bind('click',  () => {
       this.plot = plotAccordingToChoices(plotObject);
     });
 
-    $("#spacing-" + id + " input").bind('click', function () {
+    $("#spacing-" + id + " input").bind('click',  () => {
       this.plot = plotAccordingToChoices(plotObject);
     });
 
@@ -129,20 +131,20 @@ export class PlotComponent implements OnInit {
     //set checkbox colors
     if (typeof (this.plot) !== 'undefined') {
       var series = this.plot.getData();
-      choiceContainer.find("input").each(function (key) {
+      choiceContainer.find("input").each(function (key: number) {
         choiceContainer.find("#color-" + key).css("background-color", series[key].color);
       });
     }
 
-    placeholder.bind("plothover", function (pos, item) {
-      var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+    placeholder.bind("plothover", function (pos: any, item: any) {
+      var str = "(" + item.x.toFixed(2) + ", " + item.y.toFixed(2) + ")";
       $("#hoverdata").text(str);
 
       if (item) {
-        var x = item.datapoint[0].toFixed(4),
-          y = item.datapoint[1].toFixed(4);
+        var x = item.x.toFixed(4),
+          y = item.y.toFixed(4);
 
-        $("#tooltip").html(plotObject.Legend + " = " + item.series.label + " (" + x + ", " + y + ")")
+        $("#tooltip").html(plotObject.Legend + " = " + "item.series.label" + " (" + x + ", " + y + ")")
           .css({ top: item.pageY + 5, left: item.pageX + 5 })
           .fadeIn(200);
       } else {
@@ -150,7 +152,7 @@ export class PlotComponent implements OnInit {
       }
     });
     
-    placeholder.bind("plotclick", function (item) {
+    placeholder.bind("plotclick", function (item: any) {
       if (item) {
         $("#clickdata").text(" - click point " + item.dataIndex + " in " + item.series.label);
         //plot.highlight(item.series, item.datapoint);

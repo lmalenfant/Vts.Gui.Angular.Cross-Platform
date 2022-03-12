@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
 import { SolutionDomainComponent } from './solution-domain.component';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ describe('solution-domain component', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [SolutionDomainComponent, TestHostComponent],
         imports: [FormsModule],
@@ -20,20 +20,23 @@ describe('solution-domain component', () => {
       testHostComponent.solutionDomainComponent.solutionDomain = { value: "ROfRho" };
       testHostComponent.solutionDomainComponent.range = {
         title: 'Detector Positions',
-        startLabel: 'Begin',
+        axis: "rho",
+        axisRange: {
+          start: 0.5,
+          stop: 9.5,
+          count: 19
+        },
+      startLabel: 'Begin',
         startLabelUnits: 'mm',
-        start: 0.5,
         endLabel: 'End',
         endLabelUnits: 'mm',
-        stop: 9.5,
         numberLabel: 'Number',
-        count: 19
       };
       testHostComponent.solutionDomainComponent.independentAxes = {
         show: false,
         first: 'ρ',
-        second: 't',
-        label: 't',
+        second: 'time',
+        label: 'time',
         value: 0.05,
         units: 'ns',
         firstUnits: 'mm',
@@ -43,14 +46,14 @@ describe('solution-domain component', () => {
       testHostFixture.detectChanges();
     }));
 
-    it('should have a solution domain value of R(ρ)', async(() => {
+    it('should have a solution domain value of R(ρ)', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         const testElement = testHostFixture.debugElement.query(By.css('input[ng-reflect-name="SolutionDomainTest"]'));
         expect(testElement.nativeElement.value).toBe('ROfRho');
       });
     }));
 
-    it('should allow the model analysis type to be changed to R(fx, t)', async(() => {
+    it('should allow the model analysis type to be changed to R(fx, t)', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         let options = testHostFixture.debugElement.queryAll(By.css('input[ng-reflect-name="SolutionDomainTest"]'));
         options[3].triggerEventHandler('change', { target: options[3].nativeElement });
@@ -60,7 +63,7 @@ describe('solution-domain component', () => {
       });
     }));
 
-    it('should show the independent axis when R(fx, ft) is clicked', async(() => {
+    it('should show the independent axis when R(fx, ft) is clicked', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         let options = testHostFixture.debugElement.queryAll(By.css('input[ng-reflect-name="SolutionDomainTest"]'));
         options[5].triggerEventHandler('change', { target: options[5].nativeElement });
@@ -71,7 +74,7 @@ describe('solution-domain component', () => {
       });
     }));
 
-    it('should have independent axes of fx and ft when R(fx, ft) is clicked', async(() => {
+    it('should have independent axes of fx and ft when R(fx, ft) is clicked', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         let options = testHostFixture.debugElement.queryAll(By.css('input[ng-reflect-name="SolutionDomainTest"]'));
         options[5].triggerEventHandler('change', { target: options[5].nativeElement });
@@ -83,20 +86,20 @@ describe('solution-domain component', () => {
       });
     }));
 
-    it('should have independent axes of ρ and t and t has value 0.05 ns', async(() => {
+    it('should have independent axes of ρ and t and t has value 0.05 ns', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         let options = testHostFixture.debugElement.queryAll(By.css('input[ng-reflect-name="SolutionDomainTest"]'));
         options[2].triggerEventHandler('change', { target: options[2].nativeElement });
         options[2].nativeElement.click();
         testHostFixture.detectChanges();
         options = testHostFixture.debugElement.queryAll(By.css('input[name="IndependentAxis"]'));   
-        expect(options[0].attributes["ng-reflect-value"]).toBe('t');
+        expect(options[0].attributes["ng-reflect-value"]).toBe('time');
         expect(options[1].attributes["ng-reflect-value"]).toBe('ρ');
         testHostFixture.whenStable().then(() => {
           let testElement = testHostFixture.debugElement.query(By.css('#independentAxisValue'));
           expect(testElement.nativeElement.value).toBe('0.05');
           testElement = testHostFixture.debugElement.query(By.css('#independentAxisLabel'));
-          expect(testElement.nativeElement.innerText).toEqual('t');
+          expect(testElement.nativeElement.innerText).toEqual('time');
           testElement = testHostFixture.debugElement.query(By.css('#independentAxisUnits'));
           expect(testElement.nativeElement.innerText).toEqual('ns');
         });
@@ -108,7 +111,7 @@ describe('solution-domain component', () => {
         template: `<app-solution-domain></app-solution-domain>`,
       })
       class TestHostComponent {
-        @ViewChild(SolutionDomainComponent, /* TODO: add static flag */ {})
-        public solutionDomainComponent: SolutionDomainComponent;
+        @ViewChild(SolutionDomainComponent, { static: true })
+        public solutionDomainComponent: SolutionDomainComponent = new SolutionDomainComponent;
       }
 });

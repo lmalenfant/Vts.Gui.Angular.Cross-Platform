@@ -1,5 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { By } from "@angular/platform-browser";
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { OptimizationParametersComponent } from './optimization-parameters.component';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -8,7 +7,7 @@ describe('optimization-parameters component', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [OptimizationParametersComponent, TestHostComponent],
         imports: [FormsModule],
@@ -17,12 +16,12 @@ describe('optimization-parameters component', () => {
       .compileComponents();
     }));
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
     }));
 
-    it('should have a value of μa and μs', async(() => {
+    it('should have a value of μa and μs', waitForAsync(() => {
       testHostComponent.optimizationParametersComponent.optimizationParameters = { value: "muaandmusp" };
       testHostFixture.detectChanges();
       expect(testHostComponent.optimizationParametersComponent.optimizationParameters.value).toBe('muaandmusp');
@@ -33,7 +32,7 @@ describe('optimization-parameters component', () => {
         template: `<app-optimization-parameters></app-optimization-parameters>`,
       })
       class TestHostComponent {
-        @ViewChild(OptimizationParametersComponent, /* TODO: add static flag */ {})
-        public optimizationParametersComponent: OptimizationParametersComponent;
+        @ViewChild(OptimizationParametersComponent, { static: true })
+        public optimizationParametersComponent: OptimizationParametersComponent = new OptimizationParametersComponent;
       }
 });

@@ -1,5 +1,5 @@
 export class PowerLawScatterer {
-  a: number;
-  b: number;
-  show: boolean;
+  public a: number = 0;
+  public b: number = 0;
+  public show: boolean = true;
 }

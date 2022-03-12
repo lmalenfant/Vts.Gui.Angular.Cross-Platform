@@ -1,3 +1,3 @@
 export class OptimizerType {
-  value: string;
+  public value: string = "";
 }

@@ -7,7 +7,7 @@ import { Range } from './range.model';
 })
 /** range component*/
 export class RangeComponent implements OnInit {
-  @Input() range: Range;
+  @Input() range: Range = new Range;
 
   ngOnInit() {
   }

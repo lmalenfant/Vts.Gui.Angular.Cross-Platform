@@ -8,8 +8,8 @@
     </tr>
     <tr>
       <td>Time-Domain</td>
-      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfRhoAndTime" (click)="setIndependentAxes('ρ', 'mm', 't', 'ns')" />&nbsp;R(ρ, t)</td>
-      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfFxAndTime" (click)="setIndependentAxes('fx', '1/mm', 't', 'ns')" />&nbsp;R(fx, t)</td>
+      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfRhoAndTime" (click)="setIndependentAxes('ρ', 'mm', 'time', 'ns')" />&nbsp;R(ρ, t)</td>
+      <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfFxAndTime" (click)="setIndependentAxes('fx', '1/mm', 'time', 'ns')" />&nbsp;R(fx, t)</td>
     </tr>
     <tr>
       <td>Frequency-Domain</td>
@@ -17,19 +17,18 @@
       <td><input name="SolutionDomain{{id}}" type="radio" [(ngModel)]="solutionDomain.value" value="ROfFxAndFt" (click)="setIndependentAxes('fx', '1/mm', 'ft', 'GHz')" />&nbsp;R(fx, ft)</td>
     </tr>
   </table><br *ngIf="independentAxes.show" />
-  <div *ngIf="independentAxes.show" class="form-inline">
-    Independent Axis:&nbsp;
-    <input name="IndependentAxis" type="radio" [(ngModel)]="independentAxes.label" value="{{independentAxes.second}}" (click)="changeUnits(2)" />&nbsp;{{independentAxes.first}}&nbsp;
-    <input name="IndependentAxis" type="radio" [(ngModel)]="independentAxes.label" value="{{independentAxes.first}}" (click)="changeUnits(1)" />&nbsp;{{independentAxes.second}}&nbsp;&nbsp;&nbsp;at&nbsp;&nbsp;
-    <div class="input-group input-group-sm axis">
-      <div class="input-group-prepend">
-        <span id="independentAxisLabel" class="input-group-text">{{independentAxes.label}}</span>
-      </div>
-      <input id="independentAxisValue" type="text" class="form-control" [(ngModel)]="independentAxes.value" />
-      <div class="input-group-append">
-        <span id="independentAxisUnits" class="input-group-text">{{independentAxes.units}}</span>
-      </div>
+  <div *ngIf="independentAxes.show" class="row form-inline">
+    <div class="col">
+      Independent Axis:&nbsp;
+      <input name="IndependentAxis" type="radio" [(ngModel)]="independentAxes.label" value="{{independentAxes.second}}" (click)="changeUnits(2)" />&nbsp;{{independentAxes.first}}&nbsp;
+      <input name="IndependentAxis" type="radio" [(ngModel)]="independentAxes.label" value="{{independentAxes.first}}" (click)="changeUnits(1)" />&nbsp;{{independentAxes.second}}&nbsp;&nbsp;&nbsp;at&nbsp;&nbsp;
     </div>
+    <div class="col input-group input-group-sm axis">
+      <span id="independentAxisLabel" class="input-group-text">{{independentAxes.label}}</span>
+      <input id="independentAxisValue" type="text" class="form-control" [(ngModel)]="independentAxes.value" />
+      <span id="independentAxisUnits" class="input-group-text">{{independentAxes.units}}</span>
+    </div>
+    <div class="col"></div>
   </div>
 </div>
 <br />

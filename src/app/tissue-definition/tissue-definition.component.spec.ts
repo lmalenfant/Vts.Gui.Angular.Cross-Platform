@@ -1,5 +1,5 @@
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from "@angular/platform-browser";
 import { Liver, Skin } from './absorber-list';
@@ -10,7 +10,7 @@ describe('tissue-definition component', () => {
   let testHostComponent: TestHostComponent;
   let testHostFixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TissueDefinitionComponent, TestHostComponent],
       imports: [FormsModule],
@@ -32,33 +32,30 @@ describe('tissue-definition component', () => {
     testHostFixture.detectChanges();
   }));
 
-  it('should have a tissue type value of Liver', async(() => {
+  it('should have a tissue type value of Liver', waitForAsync(() => {
     testHostFixture.whenStable().then(() => {
-      const testElement = testHostFixture.debugElement.query(By.css('#tissue-type'));
-      console.log(testHostFixture);
-      console.log(testElement);
-      expect(testElement.nativeElement.value).toBe('Liver');
+      expect(testHostComponent.tissueDefinitionComponent.tissueType.value).toBe('Liver');
     });
   }));
 
-  it('should change the absorber values when tissue type is changed to Skin', async(() => {
+  it('should change the absorber values when tissue type is changed to Skin', waitForAsync(() => {
+    testHostFixture.detectChanges();
+    let select: HTMLSelectElement = testHostFixture.debugElement.query(By.css('#tissue-type')).nativeElement;
+    select.value = select.options[0].value;
+    select.dispatchEvent(new Event('change'));
+    testHostFixture.detectChanges();
     testHostFixture.whenStable().then(() => {
-      const testElement = testHostFixture.debugElement.query(By.css('#tissue-type'));
-      testElement.nativeElement.value = 'Skin';
-      testElement.nativeElement.dispatchEvent(new Event('change'));
-      testHostFixture.detectChanges();
       expect(testHostComponent.tissueDefinitionComponent.tissueType.value).toBe('Skin');
-      //expect(testHostComponent.tissueDefinitionComponent.tissueType.display).toBe('Skin');
       expect(testHostComponent.tissueDefinitionComponent.absorberConcentration).toBe(Skin);
     });
-  }));
+  }))
 
   @Component({
     selector: `host-component`,
     template: `<app-tissue-definition></app-tissue-definition>`,
   })
   class TestHostComponent {
-    @ViewChild(TissueDefinitionComponent, /* TODO: add static flag */ {})
-    public tissueDefinitionComponent: TissueDefinitionComponent;
+    @ViewChild(TissueDefinitionComponent, { static: true })
+    public tissueDefinitionComponent: TissueDefinitionComponent = new TissueDefinitionComponent;
   }
 });

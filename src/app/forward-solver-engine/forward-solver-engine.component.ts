@@ -9,15 +9,15 @@ import { ForwardSolverEngineList } from './forward-solver-engine-list';
 })
 /** forward-solver-engine component*/
 export class ForwardSolverEngineComponent {
-  @Input() forwardSolverEngine: ForwardSolverEngine;
-  @Input() gaussianBeam: GaussianBeam;
+  @Input() forwardSolverEngine: ForwardSolverEngine = new ForwardSolverEngine;
+  @Input() gaussianBeam: GaussianBeam = new GaussianBeam;
   @Input('forwardSolverEngineList') forwardSolverEngineList = ForwardSolverEngineList;
 
   constructor() {
 
   }
 
-  onChange(value) {
+  onChange(value: any) {
     console.log(this.forwardSolverEngine.value);
     console.log(value);
     this.forwardSolverEngine.value = value;

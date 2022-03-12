@@ -7,7 +7,7 @@ import { ModelAnalysisType } from './model-analysis-type.model';
 })
 /** model-analysis-type component*/
 export class ModelAnalysisTypeComponent {
-  @Input() modelAnalysisType: ModelAnalysisType;
+  @Input() modelAnalysisType: ModelAnalysisType = new ModelAnalysisType;
 
   constructor() {
 

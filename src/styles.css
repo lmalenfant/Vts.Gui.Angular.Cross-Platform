@@ -23,6 +23,10 @@
   width: 4rem !important;
 }
 
+.input-group {
+  flex-wrap: nowrap;
+}
+
 .reset {
   clear: both;
 }

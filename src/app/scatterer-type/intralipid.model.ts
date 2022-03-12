@@ -1,4 +1,4 @@
 export class IntralipidScatterer {
-  volumeFraction: number;
-  show: boolean;
+  public volumeFraction: number = 0;
+  public show: boolean = true;
 }

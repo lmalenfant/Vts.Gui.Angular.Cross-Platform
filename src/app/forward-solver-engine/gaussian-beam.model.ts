@@ -1,4 +1,4 @@
 export class GaussianBeam {
-  show: boolean;
-  diameter: number;
+  public show: boolean = false;
+  public diameter: number = 0;
 }

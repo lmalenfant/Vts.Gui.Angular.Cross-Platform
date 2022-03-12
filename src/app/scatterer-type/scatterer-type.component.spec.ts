@@ -1,5 +1,4 @@
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from "@angular/platform-browser";
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { ScattererTypeComponent } from './scatterer-type.component';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +7,7 @@ describe('scatterer-type component', () => {
   let testHostComponent: TestHostComponent;
   let testHostFixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ScattererTypeComponent, TestHostComponent],
       imports: [FormsModule],
@@ -18,7 +17,7 @@ describe('scatterer-type component', () => {
     testHostComponent = testHostFixture.componentInstance;
   }));
 
-  it('Scatter Type should be PowerLaw', async(() => {
+  it('Scatter Type should be PowerLaw', waitForAsync(() => {
     testHostComponent.scattererTypeComponent.intralipid = { volumeFraction: 0.01, show: false };
     testHostComponent.scattererTypeComponent.powerLaw = { a: 1.2, b: 1.42, show: true };
     testHostComponent.scattererTypeComponent.mieParticle = { particleRadius: 0.5, particleRefractiveIndex: 1.4, mediumRefractiveIndex: 1, volumeFraction: 0.01, show: false };
@@ -32,7 +31,7 @@ describe('scatterer-type component', () => {
     template: `<app-scatterer-type></app-scatterer-type>`,
   })
   class TestHostComponent {
-    @ViewChild(ScattererTypeComponent, /* TODO: add static flag */ {})
-    public scattererTypeComponent: ScattererTypeComponent;
+    @ViewChild(ScattererTypeComponent, { static: true })
+    public scattererTypeComponent: ScattererTypeComponent = new ScattererTypeComponent;
   }
 });

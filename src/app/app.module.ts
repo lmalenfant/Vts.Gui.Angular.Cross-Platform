@@ -20,6 +20,7 @@ import { PlotService } from './services/plot.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ScattererTypeComponent } from './scatterer-type/scatterer-type.component';
 import { SingleWavelengthCalculatorComponent } from './single-wavelength-calculator/single-wavelength-calculator.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SingleWavelengthCalculatorComponent } from './single-wavelength-calcula
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [PlotService],
   bootstrap: [AppComponent]

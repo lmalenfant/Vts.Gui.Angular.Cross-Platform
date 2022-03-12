@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { TestBed, waitForAsync, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
 import { ModelAnalysisTypeComponent } from './model-analysis-type.component';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ describe('model-analysis-type component', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ModelAnalysisTypeComponent, TestHostComponent],
         imports: [FormsModule]
@@ -20,14 +20,14 @@ describe('model-analysis-type component', () => {
       testHostFixture.detectChanges();
   }));
 
-    it('should have value of checked for R', async(() => {
+    it('should have value of checked for R', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         const testElement = testHostFixture.debugElement.query(By.css('input[name="ModelAnalysis"]'));
         expect(testElement.nativeElement.value).toBe('R');
       });
     }));
 
-    it('should allow the model analysis type to be changed to ∂R/∂μs`', async(() => {
+    it('should allow the model analysis type to be changed to ∂R/∂μs`', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         let options = testHostFixture.debugElement.queryAll(By.css('input[name="ModelAnalysis"]'));
         options[2].triggerEventHandler('change', { target: options[2].nativeElement });
@@ -41,7 +41,7 @@ describe('model-analysis-type component', () => {
         template: `<app-model-analysis-type></app-model-analysis-type>`,
       })
       class TestHostComponent {
-        @ViewChild(ModelAnalysisTypeComponent, /* TODO: add static flag */ {})
-        public modelAnalysisTypeComponent: ModelAnalysisTypeComponent;
+        @ViewChild(ModelAnalysisTypeComponent, { static: true })
+        public modelAnalysisTypeComponent: ModelAnalysisTypeComponent = new ModelAnalysisTypeComponent;
       }
 });

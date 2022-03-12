@@ -1,4 +1,4 @@
 export class ListType {
-  value: string;
-  display: string;
+  public value: string = "";
+  public display: string = "";
 }
