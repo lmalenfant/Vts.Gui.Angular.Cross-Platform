@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { TestBed, waitForAsync, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
 import { SingleWavelengthCalculatorComponent } from './single-wavelength-calculator.component';
 
@@ -6,7 +6,7 @@ let component: SingleWavelengthCalculatorComponent;
 let fixture: ComponentFixture<SingleWavelengthCalculatorComponent>;
 
 describe('single-wavelength-calculator component', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ SingleWavelengthCalculatorComponent ],
             imports: [ BrowserModule ],
@@ -18,7 +18,7 @@ describe('single-wavelength-calculator component', () => {
         component = fixture.componentInstance;
     }));
 
-    it('should do something', async(() => {
+    it('should do something', waitForAsync(() => {
         expect(true).toEqual(true);
     }));
 });

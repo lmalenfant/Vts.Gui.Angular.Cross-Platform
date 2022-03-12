@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from "@angular/platform-browser";
 import { PlotService } from '../services/plot.service';
@@ -10,7 +10,7 @@ let component: SpectralComponent;
 let fixture: ComponentFixture<SpectralComponent>;
 
 describe('spectral component', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
           declarations: [SpectralComponent],
           imports: [BrowserModule, FormsModule, HttpClientTestingModule],
@@ -26,7 +26,7 @@ describe('spectral component', () => {
         component = fixture.componentInstance;
     }));
 
-  it('should have a form named form1', async(() => {
+  it('should have a form named form1', waitForAsync(() => {
     fixture.detectChanges();
     const heading = fixture.debugElement.query(By.css('form'));
     expect(heading.nativeElement.name).toEqual('form1'); //This is a bad test because the value is hard-coded

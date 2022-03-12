@@ -32,6 +32,9 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
+    files: [
+      'node_modules/jquery/dist/jquery.min.js'
+    ],
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,

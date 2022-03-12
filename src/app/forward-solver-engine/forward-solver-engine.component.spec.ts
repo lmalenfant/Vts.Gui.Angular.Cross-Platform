@@ -1,15 +1,14 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
 import { ForwardSolverEngineComponent } from './forward-solver-engine.component';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ForwardSolverEngineList } from './forward-solver-engine-list';
 
 describe('forward-solver-engine component', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ForwardSolverEngineComponent, TestHostComponent],
         imports: [FormsModule],
@@ -29,14 +28,14 @@ describe('forward-solver-engine component', () => {
       testHostFixture.detectChanges();
     }));
 
-    it('should have a forward solver value of DistributedPointSourceSDA', async(() => {
+    it('should have a forward solver value of DistributedPointSourceSDA', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
         expect(testElement.nativeElement.value).toBe('DistributedPointSourceSDA');
       });
     }));
 
-    it('should show the Gaussian diameter when the forward solver is changed to DistributedGaussianSourceSDA', async(() => {
+    it('should show the Gaussian diameter when the forward solver is changed to DistributedGaussianSourceSDA', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
         testElement.nativeElement.value = 'DistributedGaussianSourceSDA';
@@ -47,7 +46,7 @@ describe('forward-solver-engine component', () => {
       });
     }));
 
-    it('should be able to change the Gaussian diameter to 2 when it is visible', async(() => {
+    it('should be able to change the Gaussian diameter to 2 when it is visible', waitForAsync(() => {
       testHostFixture.whenStable().then(() => {
         const testElement = testHostFixture.debugElement.query(By.css('#forwardSolverEngine'));
         testElement.nativeElement.value = 'DistributedGaussianSourceSDA';
