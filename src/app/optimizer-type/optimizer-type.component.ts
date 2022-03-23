@@ -10,6 +10,6 @@ export class OptimizerTypeComponent {
   @Input() optimizerType: OptimizerType = new OptimizerType;
 
   constructor() {
-    
+    console.log("Constructor - OptimizerTypeComponent");
   }
 }

@@ -10,6 +10,6 @@ export class OptimizationParametersComponent {
   @Input() optimizationParameters: OptimizationParameters = new OptimizationParameters;
 
   constructor() {
-    
+    console.log("Constructor - OptimizationParametersComponent");
   }
 }

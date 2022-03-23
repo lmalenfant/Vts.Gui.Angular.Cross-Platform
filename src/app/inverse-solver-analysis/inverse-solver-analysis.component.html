@@ -36,8 +36,8 @@
       </div>
       <input id="noiseValue" name="noiseValue" type="text" class="form-control" [(ngModel)]="noiseValue"/>
     </div> 
-    <button id="Measured" type="submit" class="btn btn-primary" (click)="plotMeasured()">Plot Measured Data</button>&nbsp;
-    <button id="InitialGuess" type="submit" class="btn btn-primary" (click)="plotInitialGuess()">Plot Initial Guess</button>&nbsp;
-    <button id="Simulation" type="submit" class="btn btn-primary" (click)="runInverse()">Run Inverse Solver</button>
+    <button id="Measured" type="submit" class="btn btn-primary" (click)="plotInverse('Measured')">Plot Measured Data</button>&nbsp;
+    <button id="InitialGuess" type="submit" class="btn btn-primary" (click)="plotInverse('InitialGuess')">Plot Initial Guess</button>&nbsp;
+    <button id="Simulation" type="submit" class="btn btn-primary" (click)="plotInverse('Inverse')">Run Inverse Solver</button>
   </div>
 </form>

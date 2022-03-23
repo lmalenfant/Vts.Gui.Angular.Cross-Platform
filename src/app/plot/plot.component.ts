@@ -19,7 +19,7 @@ export class PlotComponent implements OnInit {
   faTimes = faTimes;
 
   constructor(private plotData: PlotService) {
-
+    console.log("Constructor - PlotComponent");
   }
 
   @ViewChildren('plotChoices') choices: QueryList<any> = new QueryList;

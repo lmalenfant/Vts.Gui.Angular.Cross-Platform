@@ -62,7 +62,7 @@ export class ForwardSolverAnalysisComponent implements OnInit {
   //plotObjects: Array<PlotObject>;
 
   constructor(private plotData: PlotService) {
-
+    console.log("Constructor - ForwardSolverAnalysisComponent");
   }
 
   ngOnInit() {

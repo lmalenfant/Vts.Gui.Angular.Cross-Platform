@@ -10,6 +10,6 @@ export class OpticalPropertiesComponent {
   @Input() opticalProperties: OpticalProperties = new OpticalProperties;
 
   constructor() {
-
+    console.log("Constructor - OpticalPropertiesComponent");
   }
 }

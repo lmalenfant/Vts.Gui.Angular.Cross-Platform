@@ -14,7 +14,7 @@ export class ForwardSolverEngineComponent {
   @Input('forwardSolverEngineList') forwardSolverEngineList = ForwardSolverEngineList;
 
   constructor() {
-
+    console.log("Constructor - ForwardSolverEngineComponent");
   }
 
   onChange(value: any) {
