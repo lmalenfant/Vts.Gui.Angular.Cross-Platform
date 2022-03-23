@@ -96,7 +96,7 @@ export class InverseSolverAnalysisComponent implements OnInit {
     this.plotData.newPlotObject.subscribe(plotObject => this.plotObject = plotObject);
   }
 
-  plotInverse(type: string) {
+  buildSettings(type: string) {
     let xAxis = new Axis();
     xAxis.axis = this.range.axis;
     xAxis.axisRange = this.range.axisRange;
@@ -111,24 +111,21 @@ export class InverseSolverAnalysisComponent implements OnInit {
       independentAxis = null;
     }
 
-    var settings: any;
-    var engine: string = "forward";
-    
     // build specific objects
     switch (type) {
+      default:
       case 'InitialGuess':
         let igSettings = {
           forwardSolverType: this.inverseSolverEngine.value,
           forwardOpticalProperties: this.forwardOpticalProperties,
           solutionDomain: this.solutionDomain.value,
-          independentAxes: independentAxis,
+          independentAxis: independentAxis,
           xAxis: xAxis,
           opticalProperties: this.initialGuessOpticalProperties,
           modelAnalysis: this.modelAnalysisType.value,
           noiseValue: "0"
         }
-        settings = igSettings;
-        break;
+        return igSettings;
       case 'Inverse':
         let inSettings = {
           forwardSolverType: this.forwardSolverEngine.value,
@@ -137,33 +134,41 @@ export class InverseSolverAnalysisComponent implements OnInit {
           optimizerType: this.optimizerType.value,
           optimizationParameters: this.optimizationParameters.value,
           measuredData: this.measuredData,
-          independentAxes: independentAxis,
+          independentAxis: independentAxis,
           xAxis: xAxis,
           opticalProperties: this.initialGuessOpticalProperties,
         }
-        engine = "inverse";
-        settings = inSettings;
-        break;
+        return inSettings;
       case 'Measured':
         let fsSettings = {
           forwardSolverType: this.forwardSolverEngine.value,
           solutionDomain: this.solutionDomain.value,
-          independentAxes: independentAxis,
+          independentAxis: independentAxis,
           xAxis: xAxis,
           opticalProperties: this.forwardOpticalProperties,
           modelAnalysis: this.modelAnalysisType.value,
           noiseValue: this.noiseValue
         }
-        settings = fsSettings;
-        break;
+        return fsSettings;
     }
+  }
+
+  plotInverse(type: string) {
+    var settings: any;
+    settings = this.buildSettings(type); 
+  
+    var engine: string = "forward";
+    if (type === "Inverse") {
+      engine = "inverse";
+    }
+
     console.log(settings);
     console.log(JSON.stringify(settings));
     this.plotData.getPlotData(settings, engine).subscribe((data: any) => {
       //this.plotObject = data;
       let plotObject = new PlotObject();
       plotObject.Id = settings.solutionDomain;
-      if (independentAxis === null) {
+      if (settings.independentAxis === null) {
         var axis = this.range.axis;
         if (axis == 'rho') {
           axis = 'ρ';
