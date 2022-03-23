@@ -113,21 +113,8 @@ export class InverseSolverAnalysisComponent implements OnInit {
 
     // build specific objects
     switch (type) {
-      default:
-      case 'InitialGuess':
-        let igSettings = {
-          forwardSolverType: this.inverseSolverEngine.value,
-          forwardOpticalProperties: this.forwardOpticalProperties,
-          solutionDomain: this.solutionDomain.value,
-          independentAxis: independentAxis,
-          xAxis: xAxis,
-          opticalProperties: this.initialGuessOpticalProperties,
-          modelAnalysis: this.modelAnalysisType.value,
-          noiseValue: "0"
-        }
-        return igSettings;
       case 'Inverse':
-        let inSettings = {
+        return {
           forwardSolverType: this.forwardSolverEngine.value,
           solutionDomain: this.solutionDomain.value,
           inverseSolverType: this.inverseSolverEngine.value,
@@ -138,9 +125,8 @@ export class InverseSolverAnalysisComponent implements OnInit {
           xAxis: xAxis,
           opticalProperties: this.initialGuessOpticalProperties,
         }
-        return inSettings;
       case 'Measured':
-        let fsSettings = {
+        return {
           forwardSolverType: this.forwardSolverEngine.value,
           solutionDomain: this.solutionDomain.value,
           independentAxis: independentAxis,
@@ -149,14 +135,26 @@ export class InverseSolverAnalysisComponent implements OnInit {
           modelAnalysis: this.modelAnalysisType.value,
           noiseValue: this.noiseValue
         }
-        return fsSettings;
+      // InitialGuess
+      default:
+        return {
+          forwardSolverType: this.inverseSolverEngine.value,
+          forwardOpticalProperties: this.forwardOpticalProperties,
+          solutionDomain: this.solutionDomain.value,
+          independentAxis: independentAxis,
+          xAxis: xAxis,
+          opticalProperties: this.initialGuessOpticalProperties,
+          modelAnalysis: this.modelAnalysisType.value,
+          noiseValue: "0"
+        }
+
     }
   }
 
   plotInverse(type: string) {
     var settings: any;
-    settings = this.buildSettings(type); 
-  
+    settings = this.buildSettings(type);
+
     var engine: string = "forward";
     if (type === "Inverse") {
       engine = "inverse";
@@ -185,7 +183,8 @@ export class InverseSolverAnalysisComponent implements OnInit {
       plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
       if (type === "Measured") {
-        this.measuredData = data.plotList[0].data;      }
+        this.measuredData = data.plotList[0].data;
+      }
     });
   }
 } 
