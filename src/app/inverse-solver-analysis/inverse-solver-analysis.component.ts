@@ -111,44 +111,35 @@ export class InverseSolverAnalysisComponent implements OnInit {
       independentAxis = null;
     }
 
+    var settings: any = {};
+    settings.forwardSolverType = this.forwardSolverEngine.value;
+    settings.solutionDomain = this.solutionDomain.value;
+    settings.independentAxis = independentAxis;
+    settings.xAxis = xAxis;
     // build specific objects
     switch (type) {
       case 'Inverse':
-        return {
-          forwardSolverType: this.forwardSolverEngine.value,
-          solutionDomain: this.solutionDomain.value,
-          inverseSolverType: this.inverseSolverEngine.value,
-          optimizerType: this.optimizerType.value,
-          optimizationParameters: this.optimizationParameters.value,
-          measuredData: this.measuredData,
-          independentAxis: independentAxis,
-          xAxis: xAxis,
-          opticalProperties: this.initialGuessOpticalProperties,
-        }
+        settings.inverseSolverType = this.inverseSolverEngine.value;
+        settings.optimizerType = this.optimizerType.value;
+        settings.optimizationParameters = this.optimizationParameters.value;
+        settings.measuredData = this.measuredData;
+        settings.opticalProperties = this.initialGuessOpticalProperties;
+        break;
       case 'Measured':
-        return {
-          forwardSolverType: this.forwardSolverEngine.value,
-          solutionDomain: this.solutionDomain.value,
-          independentAxis: independentAxis,
-          xAxis: xAxis,
-          opticalProperties: this.forwardOpticalProperties,
-          modelAnalysis: this.modelAnalysisType.value,
-          noiseValue: this.noiseValue
-        }
+        settings.opticalProperties = this.forwardOpticalProperties;
+        settings.modelAnalysis = this.modelAnalysisType.value;
+        settings.noiseValue = this.noiseValue
+        break;
       // InitialGuess
       default:
-        return {
-          forwardSolverType: this.inverseSolverEngine.value,
-          forwardOpticalProperties: this.forwardOpticalProperties,
-          solutionDomain: this.solutionDomain.value,
-          independentAxis: independentAxis,
-          xAxis: xAxis,
-          opticalProperties: this.initialGuessOpticalProperties,
-          modelAnalysis: this.modelAnalysisType.value,
-          noiseValue: "0"
-        }
-
+        settings.forwardSolverType = this.inverseSolverEngine.value;
+        settings.forwardOpticalProperties = this.forwardOpticalProperties;
+        settings.opticalProperties = this.initialGuessOpticalProperties;
+        settings.modelAnalysis = this.modelAnalysisType.value;
+        settings.noiseValue = "0";
+        break;
     }
+    return settings;
   }
 
   plotInverse(type: string) {
@@ -163,23 +154,18 @@ export class InverseSolverAnalysisComponent implements OnInit {
     console.log(settings);
     console.log(JSON.stringify(settings));
     this.plotData.getPlotData(settings, engine).subscribe((data: any) => {
-      //this.plotObject = data;
-      let plotObject = new PlotObject();
-      plotObject.Id = settings.solutionDomain;
+      var label: string;
       if (settings.independentAxis === null) {
         var axis = this.range.axis;
         if (axis == 'rho') {
           axis = 'ρ';
         }
-        plotObject.Detector = "R(" + axis + ")";
-        plotObject.Legend = "R(" + axis + ")";
-        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+        label = "R(" + axis + ")";
       } else {
-        plotObject.Detector = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-        plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+        label = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
       }
-      plotObject.YAxis = "Reflectance";
+      let x = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      let plotObject = new PlotObject(settings.solutionDomain, label, x, "Reflectance");
       plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
       if (type === "Measured") {

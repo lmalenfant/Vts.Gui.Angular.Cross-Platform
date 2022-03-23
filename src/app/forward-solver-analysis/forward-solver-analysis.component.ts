@@ -98,22 +98,18 @@ export class ForwardSolverAnalysisComponent implements OnInit {
     this.plotData.getPlotData(fsSettings, "forward").subscribe((data: any) => {
       //set the plot grouping based on the checkbox value
       this.plotData.groupPlots = $("#group-plots").is(":checked");
-      let plotObject = new PlotObject();
-      plotObject.Id = fsSettings.solutionDomain;
-      if (independentAxis === null) {
+      var label: string;
+      if (fsSettings.independentAxis === null) {
         var axis = this.range.axis;
         if (axis == 'rho') {
           axis = 'ρ';
         }
-        plotObject.Detector = "R(" + axis + ")";
-        plotObject.Legend = "R(" + axis + ")";
-        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+        label = "R(" + axis + ")";
       } else {
-        plotObject.Detector = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-        plotObject.Legend = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
-        plotObject.XAxis = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+        label = "R(" + this.independentAxes.first + "," + this.independentAxes.second + ")";
       }
-      plotObject.YAxis = "Reflectance";
+      let x = this.independentAxes.label == this.independentAxes.first ? this.independentAxes.second : this.independentAxes.first;
+      let plotObject = new PlotObject(fsSettings.solutionDomain, label, x, "Reflectance");
       plotObject.PlotList = data.plotList;
       this.plotData.addNewPlot(plotObject);
     });
