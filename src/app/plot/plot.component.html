@@ -2,7 +2,7 @@
   <ul id="plot-tabs" class="nav nav-tabs">
     <li *ngFor="let plotObject of plotObjects" id="tab-{{plotObject.Id}}" class="nav-item">
       <button class="nav-link" role="tab" data-bs-toggle="tab" id="{{plotObject.Id}}" attr.data-bs-target="#pane-{{plotObject.Id}}">
-        {{plotObject.Detector}}&nbsp;&nbsp;<fa-icon [icon]="faTimes" (click)="closeTab(plotObject)"></fa-icon>
+        {{plotObject.Detector}}&nbsp;&nbsp;&nbsp;<a style="cursor: pointer; font-weight: bold;" (click)="closeTab(plotObject)">x</a>
       </button>
     </li>
   </ul>
@@ -27,7 +27,7 @@
               <input type="checkbox" name="{{i}}" checked="checked" id="id{{i}}">
             </td>
             <td style="padding-right: 5px; vertical-align: top;">
-              <label for="id{{i}}">{{plot.label}}</label>&nbsp;&nbsp;<fa-icon [icon]="faTimes" style="cursor: pointer;" (click)="deletePlot(plotObject, i);"></fa-icon>
+              <label for="id{{i}}">{{plot.label}}</label>&nbsp;&nbsp;&nbsp;<a style="cursor: pointer; font-weight: bold;" (click)="deletePlot(plotObject, i);">x</a>
             </td>
           </tr>
         </table>

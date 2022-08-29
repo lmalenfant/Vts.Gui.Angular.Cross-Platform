@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { PlotObject } from './plot-object.model';
 import { PlotService } from '../services/plot.service';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 declare var $: any;
 declare const plotAccordingToChoices: any;
 
@@ -16,7 +15,6 @@ export class PlotComponent implements OnInit {
   plotObject: PlotObject = new PlotObject;
   plotObjects: Array<PlotObject> = [this.plotObject];
   lastActionId = "";
-  faTimes = faTimes;
 
   constructor(private plotData: PlotService) {
     console.log("Constructor - PlotComponent");
